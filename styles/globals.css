@@ -1,9 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
+  background-image: url("/images/ether-logo.png"), url("/images/nsorcell-logo.png");
+  background-color: #212227;
+  background-position: -200px 120%, calc(100% + 300px) 85%;
+  background-repeat: no-repeat;
+  background-size: 800px, 850px;
+  overflow-x: hidden;
+  overflow-y: auto;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  font-family: 'Inerit', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+      background-size: 500px, 600px;
+      background-position: -150px 85%, 50% 8%;
+  }
 }
 
 a {
@@ -14,3 +32,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@-ms-viewport{
+  width: device-width;
+}
+

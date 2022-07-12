@@ -9,16 +9,54 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/css": "^11.9.0",
+    "@emotion/react": "^11.9.3",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.9.3",
+    "@nsorcell/protocol": "^0.0.1",
+    "@reduxjs/toolkit": "^1.8.3",
+    "@walletconnect/ethereum-provider": "^1.7.8",
+    "@web3-react/core": "8.0.33-beta.0",
+    "@web3-react/metamask": "8.0.26-beta.0",
+    "@web3-react/network": "8.0.26-beta.0",
+    "@web3-react/types": "^8.0.19-beta.0",
+    "@web3-react/walletconnect": "8.0.34-beta.0",
+    "ethers": "^5.6.9",
     "next": "12.2.1",
+    "next-i18next": "^11.0.0",
+    "ramda": "^0.28.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.4.0",
+    "react-modal": "^3.15.1",
+    "react-redux": "^8.0.2",
+    "redux-logic": "^3.0.3",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/node": "18.0.3",
+    "@types/ramda": "^0.28.15",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-modal": "^3.13.1",
+    "@types/styled-components": "^5.1.25",
+    "autoprefixer": "^10.4.7",
+    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.19.0",
     "eslint-config-next": "12.2.1",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.5",
+    "twin.macro": "^2.8.2",
     "typescript": "4.7.4"
+  },
+  "babelMacros": {
+    "twin": {
+      "preset": "emotion"
+    }
+  },
+  "resolutions": {
+    "styled-components": "^5"
   }
 }
