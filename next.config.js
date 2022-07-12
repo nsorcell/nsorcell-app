@@ -3,6 +3,10 @@
 const { i18n } = require("./next-i18next.config")
 
 const nextConfig = {
+  compiler: {
+    emotion: true,
+    styledComponents: true,
+  },
   reactStrictMode: true,
   swcMinify: true,
   i18n,
@@ -13,6 +17,7 @@ const nextConfig = {
     ALCHEMY_RPC_MUMBAI: process.env.ALCHEMY_RPC_MUMBAI,
   },
   swcMinify: false,
+  ssr,
 }
 
 module.exports = nextConfig
