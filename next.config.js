@@ -12,6 +12,7 @@ const nextConfig = {
     ALCHEMY_RPC_POLYGON_MAINNET: process.env.ALCHEMY_RPC_POLYGON_MAINNET,
     ALCHEMY_RPC_MUMBAI: process.env.ALCHEMY_RPC_MUMBAI,
   },
+  swcMinify: false,
 }
 
 module.exports = nextConfig
