@@ -17,7 +17,6 @@ const nextConfig = {
     ALCHEMY_RPC_MUMBAI: process.env.ALCHEMY_RPC_MUMBAI,
   },
   swcMinify: false,
-  ssr,
 }
 
 module.exports = nextConfig
