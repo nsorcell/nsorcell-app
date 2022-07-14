@@ -1,10 +1,16 @@
+import { Text } from "components/typography"
 import { FC, useCallback } from "react"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 import Metamask from "utils/connectors/metamask"
 import Network from "utils/connectors/network"
 import WalletConnect from "utils/connectors/walletconnect"
 
-const ProviderContainer = tw.div`cursor-pointer hover:bg-gray-300 p-4`
+const ProviderContainer = styled.div(() => [
+  tw`flex flex-col items-center p-4 min-w-[140px]`,
+  tw`cursor-pointer rounded-md`,
+  tw`transition-all duration-200`,
+  tw`hover:bg-gray-600`,
+])
 
 type ProviderItemProps = {
   name: string
@@ -30,12 +36,10 @@ const ProviderItem: FC<ProviderItemProps> = ({
 
   return (
     <ProviderContainer onClick={handleClick}>
-      <img
-        src={icon.light}
-        alt={name}
-        height={icon.height}
-        width={icon.width}
-      />
+      <img src={icon.dark} alt={name} height={icon.height} width={icon.width} />
+      <Text variant="subtitle1" tw="mt-2">
+        {name}
+      </Text>
     </ProviderContainer>
   )
 }
@@ -59,20 +63,20 @@ export const providerItems: Omit<ProviderItemProps, "handleConnect">[] = [
     name: "Metamask",
     connectorName: ConnectorNames.Metamask,
     icon: {
-      dark: "/images/logo-dark-metamask.svg",
-      light: "/images/logo-metamask.svg",
-      width: 300,
-      height: 40,
+      dark: "/images/metamask-logo.png",
+      light: "/images/metamask-logo.png",
+      width: 80,
+      height: 80,
     },
   },
   {
     name: "WalletConnect",
     connectorName: ConnectorNames.WalletConnect,
     icon: {
-      dark: "/images/logo-dark-walletconnect.svg",
-      light: "/images/logo-walletconnect.svg",
-      width: 300,
-      height: 40,
+      dark: "/images/walletconnect-logo.png",
+      light: "/images/walletconnect-logo.png",
+      width: 80,
+      height: 80,
     },
   },
 ]

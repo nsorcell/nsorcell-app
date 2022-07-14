@@ -1,5 +1,5 @@
-import { Text } from "components/typography"
-import { GradientText } from "components/typography/text"
+import { GradientText, Text } from "components/typography"
+import { useAppSelector } from "hooks/store"
 import { useTranslation } from "next-i18next"
 import { FC, useCallback, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -16,6 +16,11 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   const { t } = useTranslation("lottery")
 
   const dispatch = useDispatch()
+
+  const state = useAppSelector((state) => state.lottery6)
+  console.log(state)
+
+  const { waitingForApproval } = useAppSelector((state) => state.web3)
   const [domain, updateDomain] = useState<Domain>(getInitialDomain(domainSize))
 
   const toggle = useCallback(
@@ -55,6 +60,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
       <div tw="flex flex-col items-center">
         <SelectedNumbers domain={domain} choices={choices} toggle={toggle} />
         <BottomActions
+          isLoading={!!waitingForApproval}
           domain={domain}
           choices={choices}
           submit={submitNumbers}

@@ -6,8 +6,9 @@ import { Text } from "components/typography"
 import useConnectionManager from "hooks/useConnectionManager"
 import { useTranslation } from "next-i18next"
 import { ComponentProps, FC, useEffect, useRef } from "react"
+import { FaWindowClose } from "react-icons/fa"
 import Modal from "react-modal"
-import tw from "twin.macro"
+import tw, { theme } from "twin.macro"
 
 interface WalletModalProps extends ComponentProps<typeof Modal> {
   close: () => void
@@ -28,10 +29,15 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    backgroundColor: theme`colors.gray-background`,
+    color: "white",
+    border: "none",
+    borderRadius: "20px",
+    padding: "40px",
   },
 }
 
-const CloseButton = tw.button`absolute right-1 top-0`
+const CloseButton = tw.button`absolute right-4 top-4`
 
 const WalletModal: FC<WalletModalProps> = ({ close, ...props }) => {
   const { t } = useTranslation("modal")
@@ -49,16 +55,14 @@ const WalletModal: FC<WalletModalProps> = ({ close, ...props }) => {
 
   return (
     <Modal {...props} style={customStyles} appElement={appElement.current}>
-      <Text tw="text-2xl py-4" variant="subtitle1">
+      <Text tw="pt-4 pb-8" variant="h5">
         {t("preferredProvider")}
       </Text>
-      <hr />
+      <div tw="h-[0.5px] mb-8 bg-gray-600" />
       <CloseButton onClick={close}>
-        <Text tw="text-xl hover:bg-gray-200 py-0.5 px-2" variant="body1">
-          x
-        </Text>
+        <FaWindowClose size={20} />
       </CloseButton>
-      <div>
+      <div tw="flex justify-center">
         {providerItems.map((item) => (
           <ProviderItem
             key={item.name}

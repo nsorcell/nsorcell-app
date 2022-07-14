@@ -9,7 +9,6 @@ body {
   background-position: -200px 120%, calc(100% + 300px) 85%;
   background-repeat: no-repeat;
   background-size: 800px, 850px;
-  overflow-x: hidden;
   overflow-y: auto;
   padding: 0;
   margin: 0;

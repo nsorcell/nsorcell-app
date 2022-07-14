@@ -11,17 +11,6 @@ import { FaDev, FaHome, FaInfoCircle, FaLink, FaUserAlt } from "react-icons/fa"
 import tw from "twin.macro"
 import { shortenAddress } from "utils/address"
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-}
-
 const HeaderContainer = tw.header`w-full flex flex-col justify-between items-center py-8 md:flex-row`
 
 const MenuListItem: FC<{ label: string; href?: string; icon?: ReactNode }> = ({
@@ -43,9 +32,17 @@ const MenuListItem: FC<{ label: string; href?: string; icon?: ReactNode }> = ({
 
 const Header: FC = () => {
   const { t } = useTranslation("header")
-  const { account, isConnected } = useIsConnected()
-  const { handleDisconnect } = useConnectionManager()
+  const { account, isConnected, isActive, walletType } = useIsConnected()
+  const { handleConnect, handleDisconnect } = useConnectionManager()
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  const onConnect = () => {
+    if (isActive && walletType) {
+      return handleConnect(walletType)
+    }
+
+    setIsOpen(true)
+  }
 
   return (
     <HeaderContainer>
@@ -72,14 +69,13 @@ const Header: FC = () => {
               label={shortenAddress(account!)}
               onClick={() => {
                 handleDisconnect()
-                console.log({ isConnected })
               }}
               icon={{ position: "left", component: <FaUserAlt size={16} /> }}
             />
           ) : (
             <Button
               label={t("connect")}
-              onClick={() => setIsOpen(true)}
+              onClick={onConnect}
               icon={{ position: "right", component: <FaLink size={20} /> }}
             />
           )}

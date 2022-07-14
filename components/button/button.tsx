@@ -1,3 +1,4 @@
+import Loader from "components/loader"
 import { Text } from "components/typography"
 import { FC, ReactNode, useCallback } from "react"
 import "twin.macro"
@@ -10,6 +11,7 @@ type ButtonProps = {
     component: ReactNode
   }
   disabled?: boolean
+  isLoading?: boolean
   onClick: () => void
 }
 
@@ -18,25 +20,33 @@ const Button: FC<ButtonProps> = ({
   icon,
   onClick,
   disabled = false,
+  isLoading = false,
 }) => {
   const click = useCallback(() => {
-    if (disabled) {
+    if (disabled || isLoading) {
       return
     }
     onClick()
-  }, [onClick])
+  }, [onClick, disabled, isLoading])
 
   return (
     <StyledButton
       onClick={click}
       iconPosition={icon?.position}
       disabled={disabled}
+      isLoading={isLoading}
     >
-      <Text variant="label">{label}</Text>
-      {icon && (
-        <IconContainer iconPosition={icon.position}>
-          {icon.component}
-        </IconContainer>
+      {isLoading ? (
+        <Loader size="md" />
+      ) : (
+        <>
+          <Text variant="label">{label}</Text>
+          {icon && (
+            <IconContainer iconPosition={icon.position}>
+              {icon.component}
+            </IconContainer>
+          )}
+        </>
       )}
     </StyledButton>
   )

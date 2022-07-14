@@ -4,6 +4,7 @@ import { Connector } from "components/provider"
 import { ConnectorNames, connectorsByName } from "components/provider-service"
 import { useEffect, useRef } from "react"
 import { connect, disconnect } from "store/features/web3"
+import { ChainId } from "types/web3"
 import ls from "utils/local-storage"
 import { useAppDispatch } from "./store"
 
@@ -39,8 +40,10 @@ const useConnectionManager = () => {
       await connector.activate(chainId)
 
       saveConnector()
-    } catch (e) {
-      console.log(e)
+    } catch (e: any) {
+      if (e.name === "NoMetaMaskError") {
+        console.info("Waiting for MetaMask...")
+      }
     }
   }
 
@@ -54,7 +57,7 @@ const useConnectionManager = () => {
         connect({
           account,
           provider,
-          chainId: chainId || -1,
+          chainId: chainId as ChainId,
         })
       )
     }
@@ -65,7 +68,6 @@ const useConnectionManager = () => {
   }, [isActive])
 
   const handleDisconnect = () => {
-    localStorage.removeItem("user-wallet")
     dispatch(disconnect())
   }
 

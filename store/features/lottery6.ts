@@ -1,6 +1,6 @@
 import { createAction, createReducer, createSlice } from "@reduxjs/toolkit"
 import { LuckyNumbers } from "components/lottery/types"
-import id from "ramda/src/identity"
+import { Lottery6State } from "types/store"
 
 const ENTER = "lottery6/enter"
 export const enter = createAction<LuckyNumbers, typeof ENTER>(ENTER)
@@ -19,15 +19,34 @@ export const enterCanceled = createAction<undefined, typeof ENTER_CANCELED>(
   ENTER_CANCELED
 )
 
-export interface Lottery6State {}
+const FETCH_STATS = "lottery6/fetchStats"
+export const fetchStats = createAction<undefined, typeof FETCH_STATS>(
+  FETCH_STATS
+)
 
-const initialState: Lottery6State = {}
+const FETCH_STATS_RECEIVED = "lottery6/fetchStatsReceived"
+export const fetchStatsReceived = createAction<
+  Lottery6State,
+  typeof FETCH_STATS_RECEIVED
+>(FETCH_STATS_RECEIVED)
+
+const initialState: Lottery6State = {
+  players: [],
+  history: [],
+  state: "OPEN",
+  lastDraw: 0,
+  numberOfDraws: 0,
+  prizePool: "0",
+  drawInterval: 0,
+}
 
 const lottery6Slice = createSlice({
   name: "lottery6",
   initialState,
   reducers: {
-    enter: createReducer(initialState, (build) => build.addCase(enter, id)),
+    fetchStatsReceived: createReducer(initialState, (build) =>
+      build.addCase(fetchStatsReceived, (_, { payload }) => payload)
+    ),
   },
 })
 

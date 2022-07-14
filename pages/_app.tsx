@@ -10,17 +10,35 @@ import Web3Provider from "components/provider"
 import { store } from "store"
 import "styles/globals.css"
 
-const App = ({ Component, pageProps }: AppProps) => (
-  <CacheProvider value={cache}>
-    <Store store={store}>
+import DataLoader from "components/data-loader"
+import Head from "next/head"
+import { getServerSideTranslations } from "utils/translations"
+
+export const getServerSideProps = async ({ locale }: { locale: Locale }) => {
+  return {
+    props: {
+      ...(await getServerSideTranslations(locale)),
+    },
+  }
+}
+
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <CacheProvider value={cache}>
       <Web3Provider>
-        <GlobalStyles />
-        <Layout>
-          <Component {...pageProps} />{" "}
-        </Layout>
+        <Store store={store}>
+          <Head>
+            <meta name="viewport" content="viewport-fit=cover" />
+          </Head>
+          <GlobalStyles />
+          <DataLoader />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </Store>
       </Web3Provider>
-    </Store>
-  </CacheProvider>
-)
+    </CacheProvider>
+  )
+}
 
 export default appWithTranslation(App)

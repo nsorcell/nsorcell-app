@@ -11,10 +11,16 @@ import { BottomActionsContainer, InstructionPill } from "./lottery.styled"
 type BottomActionsProps = {
   domain: Domain
   choices: number
+  isLoading: boolean
   submit: () => void
 }
 
-const BottomActions: FC<BottomActionsProps> = ({ domain, choices, submit }) => {
+const BottomActions: FC<BottomActionsProps> = ({
+  domain,
+  choices,
+  isLoading,
+  submit,
+}) => {
   const { isConnected } = useIsConnected()
 
   return (
@@ -28,6 +34,7 @@ const BottomActions: FC<BottomActionsProps> = ({ domain, choices, submit }) => {
       </InstructionPill>
 
       <Button
+        isLoading={isLoading}
         disabled={!isConnected || getSelectCount(domain) !== choices}
         label="Let's Win!"
         onClick={submit}
