@@ -33,7 +33,7 @@ export const fetchStatsReceived = createAction<
 const initialState: Lottery6State = {
   players: [],
   history: [],
-  state: "OPEN",
+  state: "INITIAL",
   lastDraw: 0,
   numberOfDraws: 0,
   prizePool: "0",

@@ -3,12 +3,12 @@ export type History = Record<
   { winningNumbers: number[]; winners: string[] }
 >
 
-export type LotteryState = "OPEN" | "DRAWING" | "CALCULATING"
+export type LotteryState = "STANDBY" | "OPEN" | "DRAWING" | "CALCULATING"
 
 export interface Lottery6State {
   players: string[]
   history: History
-  state: LotteryState
+  state: LotteryState | "INITIAL"
   lastDraw: number
   numberOfDraws: number
   prizePool: string

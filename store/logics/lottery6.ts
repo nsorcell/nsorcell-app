@@ -35,20 +35,20 @@ const fetchStatsLogic = createLogic({
     )
 
     const [
+      resState,
       resPlayers,
       resHistory,
-      resState,
-      resLastDraw,
       resDrawInterval,
       resNumberOfDraws,
+      resLastDraw,
       resPrizePool,
     ] = await Promise.all([
+      await lottery.getState(),
       await lottery.getPlayers(),
       await lottery.getHistory(),
-      await lottery.getState(),
-      await lottery.getLastDrawTimestamp(),
       await lottery.getDrawInterval(),
       await lottery.getNumberOfDraws(),
+      await lottery.getLastDrawTimestamp(),
       await web3.provider!.getBalance(lottery.address),
     ])
 
@@ -56,13 +56,13 @@ const fetchStatsLogic = createLogic({
       return {
         ...acc,
         [i]: {
-          winningNumbers,
+          winningNumbers: winningNumbers.map((n) => n.toNumber()),
           winners,
         },
       }
     }, {})
 
-    const states: LotteryState[] = ["OPEN", "DRAWING", "CALCULATING"]
+    const states: LotteryState[] = ["STANDBY", "OPEN", "DRAWING", "CALCULATING"]
     const state: LotteryState = states[resState.toNumber()]
     const drawInterval = resDrawInterval.toNumber()
     const lastDraw = resLastDraw.toNumber()
@@ -101,7 +101,7 @@ const enterLogic = createLogic<{}, LuckyNumbers>({
     const { web3 } = getState() as RootState
 
     const lottery = Lottery6__factory.connect(
-      LOTTERY_6[4],
+      LOTTERY_6[web3.chainId],
       web3.provider!.getSigner()
     )
 
