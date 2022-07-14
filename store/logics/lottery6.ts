@@ -7,11 +7,13 @@ import { createLogic } from "redux-logic"
 import {
   enter,
   enterCanceled,
-  enterFailed,
   fetchStats,
   fetchStatsReceived,
-} from "store/features/lottery6"
-import { toggleWaitForApproval } from "store/features/web3"
+} from "store/features/lottery6/actions"
+import {
+  actionFailed,
+  toggleWaitForApproval,
+} from "store/features/web3/actions"
 import { RootState } from "store/store"
 import { LotteryState } from "types/store"
 
@@ -21,7 +23,11 @@ const fetchStatsLogic = createLogic({
     const { web3 } = getState() as RootState
 
     if (!web3.account || !web3.chainId || !web3.provider) {
-      reject(enterFailed())
+      reject(
+        actionFailed({
+          reason: `Web3 properties are missing: ${JSON.stringify(web3)}`,
+        })
+      )
     }
 
     allow(fetchStats())
@@ -92,7 +98,11 @@ const enterLogic = createLogic<{}, LuckyNumbers>({
     const { web3 } = getState() as RootState
 
     if (!web3.account || !web3.chainId || !web3.provider) {
-      reject(enterFailed())
+      reject(
+        actionFailed({
+          reason: `Web3 properties are missing: ${JSON.stringify(web3)}`,
+        })
+      )
     }
 
     allow(enter(action.payload.sort((a, b) => a - b)))

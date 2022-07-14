@@ -1,23 +1,28 @@
 import { GradientText, Text } from "components/typography"
+import { formatEther } from "ethers/lib/utils"
+import { useAppSelector } from "hooks/store"
 import { FC } from "react"
 import "twin.macro"
 import { HeadingContainer } from "./heading.styled"
 
 const Heading: FC = () => {
+  const { state, prizePool } = useAppSelector((state) => state.lottery6)
+
   return (
     <HeadingContainer>
       <Text variant="h1">
-        <div>The very first</div>
-        {<GradientText tw="animate-pulse">Ethereum</GradientText>} Lottery
+        Win
+        {
+          <GradientText tw="animate-pulse">
+            {` ${formatEther(prizePool)} Ether `}
+          </GradientText>
+        }
+        by entering the Lottery!
       </Text>
 
       <Text variant="subtitle1" tw="text-gray-400 mt-6">
-        Prow scuttle parrel provost Sail ho shrouds spirits boom mizzenmast
-        yardarm. Pinnace holystone mizzenmast quarter crow's nest nipperkin grog
-        yardarm hempen halter furl. Swab barque interloper chantey doubloon
-        starboard grog black jack gangway rutters. Deadlights jack lad schooner.
-        Belay yo-ho-ho keelhaul squiffy black spot yardarm spyglass sheet
-        transom heave to.
+        Simply choose your <b tw="font-weight[700]">6</b> most favorite numbers,
+        enter, and wait for the draw.
       </Text>
     </HeadingContainer>
   )
