@@ -7,10 +7,12 @@ import { Provider as Store } from "react-redux"
 import GlobalStyles from "styles/GlobalStyles"
 
 import Web3Provider from "components/provider"
+import { ToastContainer } from "react-toastify"
 import { store } from "store"
 import "styles/globals.css"
 
 import DataLoader from "components/data-loader"
+import { ToastContainerSettings } from "config/toast-settings"
 import Head from "next/head"
 import { getServerSideTranslations } from "utils/translations"
 
@@ -36,6 +38,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             <Component {...pageProps} />
           </Layout>
         </Store>
+        <ToastContainer {...ToastContainerSettings} />
       </Web3Provider>
     </CacheProvider>
   )

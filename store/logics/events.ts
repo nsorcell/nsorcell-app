@@ -1,5 +1,6 @@
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { LOTTERY_6 } from "config/contract-addresses"
+import { notify } from "config/toast-settings"
 import { createLogic } from "redux-logic"
 import { initiateListeners } from "store/features/lottery6/actions"
 import { actionFailed } from "store/features/web3/actions"
@@ -22,7 +23,7 @@ const listenersLogic = createLogic({
     allow(initiateListeners())
   },
   async process({ getState }, dispatch, done) {
-    const { web3 } = getState() as RootState
+    const { web3, lottery6 } = getState() as RootState
 
     const lottery = Lottery6__factory.connect(
       LOTTERY_6[web3.chainId],
@@ -33,14 +34,20 @@ const listenersLogic = createLogic({
       .on(LotteryEvents.ENTER, (event) => {
         console.log({ eventName: LotteryEvents.ENTER, event })
         // dispatch(playerEntered({ address: player }))
+
+        if (lottery6.state === "STANDBY") {
+          notify(`First player ${event} entered. Starting lottery countdown.`)
+        } else {
+          notify(`Player ${event} entered.`)
+        }
       })
       .on(LotteryEvents.REQUESTED_DRAW, () => {
-        console.log({ eventName: LotteryEvents.REQUESTED_DRAW })
+        notify("Draws requested.")
 
         // dispatch(requestedDraw())
       })
       .on(LotteryEvents.DRAW, (event) => {
-        console.log({ eventName: LotteryEvents.DRAW, event })
+        notify(`Numbers drawn: ${[1, 2, 3, 4, 5]}`)
 
         //   dispatch(
         //     numbersDrawn({
@@ -49,12 +56,12 @@ const listenersLogic = createLogic({
         //   )
       })
       .on(LotteryEvents.NO_WINNERS, () => {
-        console.log({ eventName: LotteryEvents.NO_WINNERS })
+        notify("There are no winners in this draw, restarting Lottery.")
 
         // dispatch(noWinners())
       })
       .on(LotteryEvents.WINNERS, (event) => {
-        console.log({ eventName: LotteryEvents.WINNERS, event })
+        notify(`Lottery finished, winners are ${["address1", "address2"]}`)
 
         // dispatch(_winners({ winners }))
       })

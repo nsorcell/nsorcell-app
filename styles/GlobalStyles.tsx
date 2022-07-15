@@ -1,4 +1,5 @@
 import { Global } from "@emotion/react"
+import "react-toastify/dist/ReactToastify.css"
 import tw, { css, GlobalStyles as BaseStyles, theme } from "twin.macro"
 
 const customStyles = css({

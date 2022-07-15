@@ -2,6 +2,7 @@ import { providers } from "@0xsequence/multicall"
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { LuckyNumbers } from "components/lottery/types"
 import { LOTTERY_6 } from "config/contract-addresses"
+import { notify } from "config/toast-settings"
 import { parseEther } from "ethers/lib/utils"
 import { createLogic } from "redux-logic"
 import {
@@ -119,6 +120,7 @@ const enterLogic = createLogic<{}, LuckyNumbers>({
       dispatch(toggleWaitForApproval())
 
       await lottery.enter(action.payload, { value: parseEther("0.1") })
+      notify("You have entered the lottery.")
     } catch (e) {
     } finally {
       dispatch(toggleWaitForApproval())
