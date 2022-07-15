@@ -17,9 +17,6 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
 
   const dispatch = useDispatch()
 
-  const state = useAppSelector((state) => state.lottery6)
-  console.log(state)
-
   const { waitingForApproval } = useAppSelector((state) => state.web3)
   const [domain, updateDomain] = useState<Domain>(getInitialDomain(domainSize))
 

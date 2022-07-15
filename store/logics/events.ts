@@ -2,7 +2,7 @@ import { Lottery6__factory } from "@nsorcell/protocol"
 import { LOTTERY_6 } from "config/contract-addresses"
 import { notify } from "config/toast-settings"
 import { createLogic } from "redux-logic"
-import { initiateListeners } from "store/features/lottery6/actions"
+import { fetchStats, initiateListeners } from "store/features/lottery6/actions"
 import { actionFailed } from "store/features/web3/actions"
 import { RootState } from "store/store"
 import { LotteryEvents } from "types/web3"
@@ -40,6 +40,8 @@ const listenersLogic = createLogic({
         } else {
           notify(`Player ${event} entered.`)
         }
+
+        dispatch(fetchStats())
       })
       .on(LotteryEvents.REQUESTED_DRAW, () => {
         notify("Draws requested.")
