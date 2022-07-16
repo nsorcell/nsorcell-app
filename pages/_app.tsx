@@ -14,14 +14,19 @@ import "styles/globals.css"
 import DataLoader from "components/data-loader"
 import { ToastContainerSettings } from "config/toast-settings"
 import Head from "next/head"
-import { getServerSideTranslations } from "utils/translations"
+import { FC, ReactNode } from "react"
 
-export const getServerSideProps = async ({ locale }: { locale: Locale }) => {
-  return {
-    props: {
-      ...(await getServerSideTranslations(locale)),
-    },
-  }
+const ActiveApp: FC<{ children: ReactNode }> = ({ children }) => {
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="viewport-fit=cover" />
+      </Head>
+      <GlobalStyles />
+      <DataLoader />
+      <Layout>{children}</Layout>
+    </>
+  )
 }
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -29,14 +34,9 @@ const App = ({ Component, pageProps }: AppProps) => {
     <CacheProvider value={cache}>
       <Web3Provider>
         <Store store={store}>
-          <Head>
-            <meta name="viewport" content="viewport-fit=cover" />
-          </Head>
-          <GlobalStyles />
-          <DataLoader />
-          <Layout>
+          <ActiveApp>
             <Component {...pageProps} />
-          </Layout>
+          </ActiveApp>
         </Store>
         <ToastContainer {...ToastContainerSettings} />
       </Web3Provider>

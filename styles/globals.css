@@ -4,6 +4,7 @@
 
 html,
 body {
+  font-family: "Inter" sans-serif;
   background-image: url("/images/ether-logo.png"), url("/images/nsorcell-logo.png");
   background-color: #212227;
   background-position: -200px 120%, calc(100% + 300px) 85%;

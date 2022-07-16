@@ -1,4 +1,4 @@
-import { Web3Provider } from "@ethersproject/providers"
+import type { Web3Provider } from "@ethersproject/providers"
 import { ChainId } from "./web3"
 
 export type History = Record<

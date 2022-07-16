@@ -13,6 +13,7 @@ const nextConfig = {
     ALCHEMY_RPC_MUMBAI: process.env.ALCHEMY_RPC_MUMBAI,
   },
   productionBrowserSourceMaps: true,
+  optimizeFonts: false,
 }
 
 module.exports = nextConfig
