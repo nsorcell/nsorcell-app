@@ -1,5 +1,4 @@
-import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit"
-import { createEpicMiddleware } from "redux-observable"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 
 import events from "./features/events"
 import lottery6 from "./features/lottery6"
@@ -13,16 +12,16 @@ const reducer = combineReducers({
 
 export type State = ReturnType<typeof reducer>
 
-import rootEpic from "./epics"
+// import rootEpic from "./epics"
 
-const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, State>()
+// const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, State>()
 
 export const store = configureStore({
-  middleware: [epicMiddleware],
+  // middleware: [epicMiddleware],
   reducer,
   devTools: process.env.NODE_ENV === "development",
 })
 
-epicMiddleware.run(rootEpic)
+// epicMiddleware.run(rootEpic)
 
 export type AppDispatch = typeof store.dispatch

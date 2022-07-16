@@ -1,7 +1,7 @@
 import { useAppDispatch } from "hooks/store"
 import useIsConnected from "hooks/useIsConnected"
 import { FC, useEffect } from "react"
-import { initiateListeners } from "store/features/lottery6/actions"
+import { fetchStats, initiateListeners } from "store/features/lottery6/actions"
 
 const DataLoader: FC = () => {
   const { isConnected } = useIsConnected()
@@ -9,6 +9,7 @@ const DataLoader: FC = () => {
 
   useEffect(() => {
     if (isConnected) {
+      dispatch(fetchStats())
       dispatch(initiateListeners())
     }
   }, [isConnected])
