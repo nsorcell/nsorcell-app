@@ -13,15 +13,11 @@ import "styles/globals.css"
 
 import DataLoader from "components/data-loader"
 import { ToastContainerSettings } from "config/toast-settings"
-import Head from "next/head"
 import { FC, ReactNode } from "react"
 
 const ActiveApp: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <Head>
-        <meta name="viewport" content="viewport-fit=cover" />
-      </Head>
       <GlobalStyles />
       <DataLoader />
       <Layout>{children}</Layout>

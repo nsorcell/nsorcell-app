@@ -315,7 +315,7 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@ethersproject/abi@5.6.4", "@ethersproject/abi@^5.6.3":
+"@ethersproject/abi@5.6.4", "@ethersproject/abi@^5.6.3", "@ethersproject/abi@^5.6.4":
   version "5.6.4"
   resolved "https://registry.yarnpkg.com/@ethersproject/abi/-/abi-5.6.4.tgz#f6e01b6ed391a505932698ecc0d9e7a99ee60362"
   integrity sha512-TTeZUlCeIHG6527/2goZA6gW5F8Emoc7MrZDC7hhP84aRGvW3TEdTnZR08Ls88YXM1m2SuK42Osw/jSi3uO8gg==
@@ -830,10 +830,14 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nsorcell/protocol@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@nsorcell/protocol/-/protocol-0.5.0.tgz#1c0d7df0a3307b968b44f7255790df54a26b05b4"
-  integrity sha512-CqQMPNlxpLTJDmrsgqDSVED/Atygw7lZpoDD3upRcwtYXd8DXtE2YTq6f6VsU5EER0LzfqfDaA3nq4F9PHuyKg==
+"@nsorcell/protocol@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@nsorcell/protocol/-/protocol-0.7.0.tgz#76a3f80cecb1a34fb760432254640ea3de0d9473"
+  integrity sha512-tE5hypcebiyezk5VE7tEkzSarO0wZw2DwEcm2wkPnA2EkYE68bhX4Lh3tyz5LM61ghdcMpTk9VGBo2n8UkTecQ==
+  dependencies:
+    "@ethersproject/abi" "^5.6.4"
+    "@ethersproject/providers" "^5.6.8"
+    ethers "^5.6.9"
 
 "@pedrouid/environment@^1.0.1":
   version "1.0.1"

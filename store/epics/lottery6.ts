@@ -1,10 +1,11 @@
+import { providers } from "@0xsequence/multicall"
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { AnyAction } from "@reduxjs/toolkit"
 import { LOTTERY_6 } from "config/contract-addresses"
 import { notify } from "config/toast-settings"
 import { parseEther } from "ethers/lib/utils"
 import { combineEpics, Epic } from "redux-observable"
-import { filter, from, map, mergeMap, tap } from "rxjs"
+import { filter, from, ignoreElements, map, mergeMap, tap } from "rxjs"
 import { State } from "store"
 import {
   enter,
@@ -21,7 +22,7 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
       const { web3 } = state$.value
       const lotteryContract = Lottery6__factory.connect(
         LOTTERY_6[web3.chainId],
-        web3.provider!.getSigner()
+        new providers.MulticallProvider(web3.provider!)
       )
 
       return from(
@@ -93,7 +94,7 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
 
       const lotteryContract = Lottery6__factory.connect(
         LOTTERY_6[web3.chainId],
-        web3.provider!
+        web3.provider!.getSigner()
       )
 
       await lotteryContract.enter(action.payload, {
@@ -102,9 +103,10 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
       notify("You have entered the lottery.")
 
       return toggleWaitForApproval()
-    })
+    }),
+    ignoreElements()
   )
 
-const lottery6Epic = combineEpics(enterEpic)
+const lottery6Epic = combineEpics(enterEpic, fetchStateEpic)
 
 export default lottery6Epic
