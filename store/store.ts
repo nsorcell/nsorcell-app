@@ -18,10 +18,9 @@ import rootEpic from "./epics"
 const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, State>()
 
 export const store = configureStore({
-  middleware: (defaultMiddleware) =>
-    defaultMiddleware({ thunk: false }).concat(epicMiddleware),
+  middleware: [epicMiddleware],
   reducer,
-  devTools: true,
+  devTools: process.env.NODE_ENV === "development",
 })
 
 epicMiddleware.run(rootEpic)

@@ -26,7 +26,7 @@ export const GradientIcon: FC<{
     <svg width="0" height="0">
       <linearGradient id={`gradient-${name}`} {...direction}>
         {colorStops.map(({ color, offset }) => (
-          <stop stopColor={color} offset={offset} />
+          <stop stopColor={color} offset={offset} key={color} />
         ))}
       </linearGradient>
     </svg>
