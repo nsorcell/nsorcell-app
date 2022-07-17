@@ -1,24 +1,26 @@
 import { providers } from "@0xsequence/multicall"
 import { Lottery6__factory } from "@nsorcell/protocol"
-import { AnyAction } from "@reduxjs/toolkit"
+import { AnyAction, isAnyOf } from "@reduxjs/toolkit"
 import { LOTTERY_6 } from "config/contract-addresses"
 import { notify } from "config/toast-settings"
 import { parseEther } from "ethers/lib/utils"
 import { combineEpics, Epic } from "redux-observable"
-import { filter, from, ignoreElements, map, mergeMap, tap } from "rxjs"
+import { catchError, filter, from, map, of, pipe, switchMap, tap } from "rxjs"
 import { State } from "store"
 import {
   enter,
+  enterFailed,
+  enterSuccessful,
   fetchStats,
   fetchStatsReceived,
 } from "store/features/lottery6/actions"
 import { toggleWaitForApproval } from "store/features/web3/actions"
-import { History, LotteryState } from "types/store"
+import { transformFetchStateResult } from "utils/store"
 
 const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(fetchStats.match),
-    mergeMap(() => {
+    switchMap(() => {
       const { web3 } = state$.value
       const lotteryContract = Lottery6__factory.connect(
         LOTTERY_6[web3.chainId],
@@ -37,59 +39,13 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
         ])
       )
     }),
-    map(
-      ([
-        resState,
-        resPlayers,
-        resHistory,
-        resDrawInterval,
-        resNumberOfDraws,
-        resLastDraw,
-        resPrizePool,
-      ]) => {
-        const history = resHistory.reduce<History>(
-          (acc, [winningNumbers, winners], i) => {
-            return {
-              ...acc,
-              [i]: {
-                winningNumbers: winningNumbers.map((n) => n.toNumber()),
-                winners,
-              },
-            }
-          },
-          {} as History
-        )
-
-        const states: LotteryState[] = [
-          "STANDBY",
-          "OPEN",
-          "DRAWING",
-          "CALCULATING",
-        ]
-        const state_: LotteryState = states[resState.toNumber()]
-        const drawInterval = resDrawInterval.toNumber()
-        const lastDraw = resLastDraw.toNumber()
-        const numberOfDraws = resNumberOfDraws.toNumber()
-        const prizePool = resPrizePool.toString()
-
-        return {
-          state: state_,
-          players: resPlayers,
-          history,
-          drawInterval,
-          lastDraw,
-          numberOfDraws,
-          prizePool,
-        }
-      }
-    ),
-    map(fetchStatsReceived)
+    map(pipe(transformFetchStateResult, fetchStatsReceived))
   )
 
 const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(enter.match),
-    tap(async (action) => {
+    switchMap((action) => {
       const { web3 } = state$.value
 
       const lotteryContract = Lottery6__factory.connect(
@@ -97,16 +53,30 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
         web3.provider!.getSigner()
       )
 
-      await lotteryContract.enter(action.payload, {
-        value: parseEther("0.1"),
-      })
-      notify("You have entered the lottery.")
-
-      return toggleWaitForApproval()
-    }),
-    ignoreElements()
+      return from(
+        lotteryContract.enter(action.payload, {
+          value: parseEther("0.1"),
+        })
+      ).pipe(
+        map(() => enterSuccessful()),
+        tap(() => {
+          notify("Player entered the lottery.")
+        }),
+        catchError(() => of(enterFailed()))
+      )
+    })
   )
 
-const lottery6Epic = combineEpics(enterEpic, fetchStateEpic)
+const waitForApprovalEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
+  action$.pipe(
+    filter(isAnyOf(enter.match, enterSuccessful.match, enterFailed.match)),
+    map(() => toggleWaitForApproval())
+  )
+
+const lottery6Epic = combineEpics(
+  enterEpic,
+  fetchStateEpic,
+  waitForApprovalEpic
+)
 
 export default lottery6Epic

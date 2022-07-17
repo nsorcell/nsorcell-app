@@ -830,10 +830,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@nsorcell/protocol@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@nsorcell/protocol/-/protocol-0.7.0.tgz#76a3f80cecb1a34fb760432254640ea3de0d9473"
-  integrity sha512-tE5hypcebiyezk5VE7tEkzSarO0wZw2DwEcm2wkPnA2EkYE68bhX4Lh3tyz5LM61ghdcMpTk9VGBo2n8UkTecQ==
+"@nsorcell/protocol@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@nsorcell/protocol/-/protocol-0.8.0.tgz#f93e08afe55897502560af51fb73f81a67c8c678"
+  integrity sha512-iVQ//NLwICy16OEuMynk4fLWfwjulVTuahKztaszS7dknpaYiIbgBZ8Ht3Ye9PRfhD2MwT4PtVHwPS4glx/Nwg==
   dependencies:
     "@ethersproject/abi" "^5.6.4"
     "@ethersproject/providers" "^5.6.8"
