@@ -1,3 +1,4 @@
+import { MetaMaskInpageProvider } from "@metamask/providers"
 // Local
 export const localRPCEthereum = "http://localhost:8545"
 export const localRPCMatic = "http://localhost:8540"
@@ -14,3 +15,9 @@ export const RPCMatic =
 export const RPCMumbai =
   process.env.ALCHEMY_RPC_MUMBAI ||
   "https://matic-testnet-archive-rpc.bwarelabs.com	"
+
+export const injectedProvider = () => {
+  if (typeof window !== "undefined") {
+    return window.ethereum as MetaMaskInpageProvider
+  }
+}

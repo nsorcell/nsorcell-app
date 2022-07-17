@@ -1,5 +1,6 @@
 import Button from "components/button"
 import { WalletModal } from "components/modal"
+import NetworkDropdown from "components/network-dropdown"
 import { Text } from "components/typography"
 import useConnectionManager from "hooks/useConnectionManager"
 import useIsConnected from "hooks/useIsConnected"
@@ -63,7 +64,8 @@ const Header: FC = () => {
           </ul>
         </div>
 
-        <div>
+        <div tw="w-full flex items-center gap-4">
+          <NetworkDropdown />
           {isConnected ? (
             <Button
               label={shortenAddress(account!)}

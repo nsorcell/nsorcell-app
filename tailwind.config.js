@@ -15,7 +15,7 @@ module.exports = {
         "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
       },
       colors: {
-        footer: "#020104",
+        panel: "#020104",
         "gray-background": "#212227",
         "gray-number": "#2A2C33",
         "gray-slot": "#313642",

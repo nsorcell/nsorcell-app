@@ -1,6 +1,11 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit"
 import { Web3State } from "types/store"
-import { connect, disconnect, toggleWaitForApproval } from "./actions"
+import {
+  connect,
+  disconnect,
+  switchChain,
+  toggleWaitForApproval,
+} from "./actions"
 
 const initialState: Web3State = {
   account: "",
@@ -27,6 +32,11 @@ const ethersSlice = createSlice({
         ...state,
         waitingForApproval: !state.waitingForApproval,
       }))
+    ),
+    switchChain: createReducer(initialState, (build) =>
+      build.addCase(switchChain, (state, action) => {
+        state.chainId = action.payload
+      })
     ),
   },
 })
