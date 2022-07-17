@@ -64,16 +64,18 @@ const Header: FC = () => {
           </ul>
         </div>
 
-        <div tw="w-full flex items-center gap-4">
-          <NetworkDropdown />
+        <div tw="w-full flex items-center justify-end gap-4">
           {isConnected ? (
-            <Button
-              label={shortenAddress(account!)}
-              onClick={() => {
-                handleDisconnect()
-              }}
-              icon={{ position: "left", component: <FaUserAlt size={16} /> }}
-            />
+            <>
+              <NetworkDropdown />
+              <Button
+                label={shortenAddress(account!)}
+                onClick={() => {
+                  handleDisconnect()
+                }}
+                icon={{ position: "left", component: <FaUserAlt size={16} /> }}
+              />
+            </>
           ) : (
             <Button
               label={t("connect")}
