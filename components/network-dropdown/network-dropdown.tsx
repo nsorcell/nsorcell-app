@@ -1,7 +1,8 @@
 import { GradientText, Text } from "components/typography"
 import { networkSelectionConfig } from "config/networks"
 import { useAppDispatch, useAppSelector } from "hooks/store"
-import { FC, useCallback, useEffect, useRef, useState } from "react"
+import useClickAway from "hooks/useClickAway"
+import { FC, useCallback, useRef, useState } from "react"
 import { FaChevronDown, FaNetworkWired } from "react-icons/fa"
 import { VscDebugDisconnect } from "react-icons/vsc"
 import { disconnect } from "store/features/web3/actions"
@@ -30,21 +31,7 @@ const NetworkDropdown: FC = () => {
     [isDropdownOpen]
   )
 
-  useEffect(() => {
-    function handleClickOutside(event: DocumentEventMap["mousedown"]) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        toggleDropdown(false)()
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [])
+  useClickAway(toggleDropdown(false), dropdownRef)
 
   return (
     <div

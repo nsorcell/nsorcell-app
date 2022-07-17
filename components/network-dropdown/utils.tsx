@@ -15,7 +15,7 @@ export const ListItem: FC<ListItemProps> = ({ label, icon, onClick }) => {
   return (
     <MenuItem tabIndex={0} role="menuitem" onClick={onClick} className="group">
       <Text variant="body1" tw="flex items-center gap-4">
-        <span tw="group-hover:animate-spin">{icon && icon}</span>
+        <span tw="animate-wiggle group-hover:animate-spin">{icon && icon}</span>
         {label}
       </Text>
     </MenuItem>

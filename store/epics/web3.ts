@@ -2,21 +2,11 @@ import { AnyAction } from "@reduxjs/toolkit"
 import { ethers } from "ethers"
 import { combineEpics, Epic } from "redux-observable"
 
-import { catchError, filter, from, map, of, switchMap, take, tap } from "rxjs"
+import { catchError, filter, from, map, of, switchMap } from "rxjs"
 import { State } from "store"
-import {
-  connect,
-  initiateSwitchChain,
-  switchChain,
-} from "store/features/web3/actions"
+import { initiateSwitchChain, switchChain } from "store/features/web3/actions"
 import { injectedProvider } from "utils/rpc"
 
-const connectEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
-  action$.pipe(
-    filter(connect.match),
-    take(1),
-    tap((action) => console.log(action))
-  )
 const switchChainEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(initiateSwitchChain.match),
@@ -34,6 +24,6 @@ const switchChainEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
     })
   )
 
-const web3Epic = combineEpics(connectEpic, switchChainEpic)
+const web3Epic = combineEpics(switchChainEpic)
 
 export default web3Epic
