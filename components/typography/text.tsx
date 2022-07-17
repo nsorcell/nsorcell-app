@@ -1,6 +1,5 @@
 import { FC } from "react"
-import styled from "styled-components"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
 
 import { styles, Variant } from "./styles"
 
@@ -27,7 +26,7 @@ export const GradientIcon: FC<{
     <svg width="0" height="0">
       <linearGradient id={`gradient-${name}`} {...direction}>
         {colorStops.map(({ color, offset }) => (
-          <stop stopColor={color} offset={offset} />
+          <stop stopColor={color} offset={offset} key={color} />
         ))}
       </linearGradient>
     </svg>

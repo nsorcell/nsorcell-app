@@ -6,3 +6,6 @@ export const shortenAddress = (address: string): string => {
     address.slice(address.length - 4, address.length)
   )
 }
+
+export const blockScan = (address: string) =>
+  `https://blockscan.com/address/${address}`

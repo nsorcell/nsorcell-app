@@ -1,25 +1,28 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { createLogicMiddleware } from "redux-logic"
+import { AnyAction, combineReducers, configureStore } from "@reduxjs/toolkit"
+import { createEpicMiddleware } from "redux-observable"
 
 import events from "./features/events"
 import lottery6 from "./features/lottery6"
 import web3 from "./features/web3/web3"
 
-import logics from "./logics"
+import rootEpic from "./epics"
 
-// @ts-ignore
-const logicMiddleware = createLogicMiddleware(logics, {})
-
-export const store = configureStore({
-  middleware: () => [logicMiddleware],
-  reducer: {
-    events: events.reducer,
-    lottery6: lottery6.reducer,
-    web3: web3.reducer,
-  },
-  devTools: true,
+const reducer = combineReducers({
+  events: events.reducer,
+  lottery: lottery6.reducer,
+  web3: web3.reducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export type State = ReturnType<typeof reducer>
+
+const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, State>()
+
+export const store = configureStore({
+  middleware: [epicMiddleware],
+  reducer,
+  devTools: process.env.NODE_ENV === "development",
+})
+
+epicMiddleware.run(rootEpic)
 
 export type AppDispatch = typeof store.dispatch

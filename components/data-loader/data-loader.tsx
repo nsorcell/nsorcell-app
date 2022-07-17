@@ -9,7 +9,8 @@ const DataLoader: FC = () => {
 
   useEffect(() => {
     if (isConnected) {
-      return [fetchStats, initiateListeners].forEach(dispatch)
+      dispatch(fetchStats())
+      dispatch(initiateListeners())
     }
   }, [isConnected])
   return null

@@ -6,7 +6,7 @@ import "twin.macro"
 import { HeadingContainer } from "./heading.styled"
 
 const Heading: FC = () => {
-  const { state, prizePool } = useAppSelector((state) => state.lottery6)
+  const { state, prizePool } = useAppSelector((state) => state.lottery)
 
   return (
     <HeadingContainer>
