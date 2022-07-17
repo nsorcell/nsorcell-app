@@ -1,6 +1,6 @@
 import { ReactNode } from "react"
 import { FaEthereum } from "react-icons/fa"
-import { GrHostMaintenance } from "react-icons/gr"
+import { GiCogLock } from "react-icons/gi"
 import "twin.macro"
 import { ChainId } from "types/web3"
 
@@ -32,12 +32,12 @@ export const networkSelectionConfig: Record<ChainId, NetworkAttribute> = {
     type: "testnet",
   },
   1337: {
-    icon: <GrHostMaintenance size={20} tw="bg-blue-300" />,
+    icon: <GiCogLock size={20} tw="text-green-400" />,
     label: "Local1 (1337)",
     type: "local",
   },
   31337: {
-    icon: <GrHostMaintenance size={20} tw="bg-blue-300" />,
+    icon: <GiCogLock size={20} tw="text-green-400" />,
     label: "Local2 (31337)",
     type: "local",
   },
