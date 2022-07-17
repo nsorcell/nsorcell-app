@@ -1,0 +1,7 @@
+{
+  "win": "Win",
+  "ether": "Ether",
+  "byEntering": "by entering the Lottery!",
+  "chooseInstructions": "Simply choose your {{number}} most favorite numbers, enter, and wait for the draw.",
+  "lotteryState": "The state of the lottery is {{state}}."
+}

@@ -1,3 +1,17 @@
 {
-  "connect": "Connect"
+  "connect": "Connect",
+  "menu": {
+    "about": "About",
+    "devlog": "Devlog",
+    "home": "Home"
+  },
+  "network": "Network",
+  "networks": {
+    "mainnet": "Ethereum Mainnet",
+    "rinkeby": "Rinkeby Testnet",
+    "matic": "Polygon Mainnet",
+    "mumbai": "Mumbai Testnet",
+    "local1": "Local1 (1337)",
+    "local2": "Local2 (31337)"
+  }
 }

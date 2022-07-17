@@ -44,7 +44,8 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   return (
     <LotteryContainer>
       <Text variant="h5" tw="text-white mb-6">
-        Select your {<GradientText>winning</GradientText>} numbers
+        {t("select")} {<GradientText>{t("winning")}</GradientText>}{" "}
+        {t("numbers")}
       </Text>
 
       <DomainLayout domain={domain} toggle={toggle} />
@@ -52,7 +53,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
       <div tw=" w-full h-[1px] my-6 bg-gray-800" />
 
       <Text variant="h5" tw="text-white mb-6">
-        {<GradientText>Selected</GradientText>} numbers
+        {<GradientText>{t("selected")}</GradientText>} {t("numbers")}
       </Text>
       <div tw="flex flex-col items-center">
         <SelectedNumbers domain={domain} choices={choices} toggle={toggle} />

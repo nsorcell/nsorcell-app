@@ -1,4 +1,5 @@
 import range from "ramda/src/range"
+import { globalT } from "utils/globalT"
 import { Domain } from "./types"
 
 export const getInitialDomain = (domainSize: number): Domain =>
@@ -16,12 +17,12 @@ export const getRemainingText = (domain: Domain, choices: number) => {
   const selectedCount = getSelectCount(domain)
 
   if (selectedCount === 0) {
-    return `Pick your ${choices} lucky numbers`
+    return globalT("lottery:pickNumber", { numbers: choices })
   }
 
   if (![0, 6].includes(selectedCount)) {
-    return `You have ${choices - selectedCount} empty slots left`
+    return globalT("lottery:emptySlots", { slots: choices - selectedCount })
   }
 
-  return "Nice you have filled all the slots!"
+  return globalT("lottery:filledAll")
 }

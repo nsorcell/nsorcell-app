@@ -58,9 +58,21 @@ const Header: FC = () => {
       <div tw="flex flex-col items-center w-full px-16 md:flex-row">
         <div tw="w-full text-white md:ml-20">
           <ul tw="flex items-center flex-col mb-8 md:mb-0 md:flex-row">
-            <MenuListItem label="Home" icon={<FaHome size={20} />} />
-            <MenuListItem label="About" icon={<FaInfoCircle size={20} />} />
-            <MenuListItem label="Devlog" icon={<FaDev size={20} />} />
+            <MenuListItem
+              label={t("menu.home")}
+              href="/"
+              icon={<FaHome size={20} />}
+            />
+            <MenuListItem
+              label={t("menu.about")}
+              href="/about"
+              icon={<FaInfoCircle size={20} />}
+            />
+            <MenuListItem
+              label={t("menu.devlog")}
+              href="/devlog"
+              icon={<FaDev size={20} />}
+            />
           </ul>
         </div>
 

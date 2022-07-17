@@ -2,6 +2,7 @@ import { GradientText, Text } from "components/typography"
 import { networkSelectionConfig } from "config/networks"
 import { useAppDispatch, useAppSelector } from "hooks/store"
 import useClickAway from "hooks/useClickAway"
+import { useTranslation } from "next-i18next"
 import { FC, useCallback, useRef, useState } from "react"
 import { FaChevronDown, FaNetworkWired } from "react-icons/fa"
 import { VscDebugDisconnect } from "react-icons/vsc"
@@ -18,6 +19,7 @@ const NetworkDropdown: FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
   const { chainId } = useAppSelector((state) => state.web3)
+  const { t } = useTranslation("header")
   const dispatch = useAppDispatch()
 
   const toggleDropdown = useCallback(
@@ -50,7 +52,7 @@ const NetworkDropdown: FC = () => {
             <FaNetworkWired size={20} tw="text-white" />
           </span>
           <Text variant="body1" tw="text-white">
-            Network:{" "}
+            {t("network")}:{" "}
             <GradientText tw="font-bold">
               {networkSelectionConfig[chainId].label.split(" ")[0]}
             </GradientText>
@@ -67,7 +69,7 @@ const NetworkDropdown: FC = () => {
         >
           <div tw="px-4 py-3">
             <Text variant="body1" tw=" text-white">
-              Network
+              {t("network")}
             </Text>
           </div>
 

@@ -1,4 +1,13 @@
 {
   "selectedNumbers": "Your currently selected numbers:",
-  "submitNumbers": "Submit your numbers"
+  "submitNumbers": "Submit your numbers",
+  "connectToPlay": "You have to connect to play.",
+  "letsWin": "Let's Win!",
+  "pickNumber": "Pick your {{numbers}} lucky numbers!",
+  "emptySlots": "You have {{slots}} empty slots left!",
+  "filledAll": "Nice you have filled all the slots!",
+  "select": "Select your",
+  "selected": "Selected",
+  "winning": "winning",
+  "numbers": "numbers"
 }

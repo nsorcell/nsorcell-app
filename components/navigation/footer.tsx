@@ -1,4 +1,5 @@
 import { Text } from "components/typography"
+import { useTranslation } from "next-i18next"
 import { FC } from "react"
 import "twin.macro"
 import { FooterContainer } from "./navigation.styled"
@@ -25,17 +26,26 @@ const FooterList: FC<{ heading: string; items: string[] }> = ({
   </ul>
 )
 
-const Footer: FC = () => (
-  <FooterContainer>
-    <div tw="flex flex-col md:flex-row">
-      <FooterList heading="Resurces" items={["Next", "TailwindCSS"]} />
-      <FooterList heading="Follow us" items={["Github", "LinkedIn"]} />
-      <FooterList
-        heading="Legal"
-        items={["Privacy Policy", "Terms & Conditions"]}
-      />
-    </div>
-  </FooterContainer>
-)
+const Footer: FC = () => {
+  const { t } = useTranslation("footer")
+  return (
+    <FooterContainer>
+      <div tw="flex flex-col md:flex-row">
+        <FooterList
+          heading={t("resources.resources")}
+          items={[t("resources.next"), t("resources.tailwind")]}
+        />
+        <FooterList
+          heading={t("social.social")}
+          items={[t("social.github"), t("social.linkedin")]}
+        />
+        <FooterList
+          heading={t("legal.legal")}
+          items={[t("legal.privacy"), t("legal.terms")]}
+        />
+      </div>
+    </FooterContainer>
+  )
+}
 
 export default Footer
