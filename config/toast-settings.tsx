@@ -10,9 +10,10 @@ export const ToastContainerSettings: ComponentProps<typeof ToastContainer> = {
   autoClose: 5000,
   newestOnTop: true,
   closeOnClick: true,
-  rtl: true,
+  rtl: false,
   hideProgressBar: true,
   theme: "dark",
+  pauseOnFocusLoss: false,
 }
 
 export const notify = (message: string) => {
