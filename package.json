@@ -15,7 +15,7 @@
     "@emotion/react": "^11.9.3",
     "@emotion/server": "^11.4.0",
     "@emotion/styled": "^11.9.3",
-    "@nsorcell/protocol": "0.8.0",
+    "@nsorcell/protocol": "0.10.0",
     "@reduxjs/toolkit": "^1.8.3",
     "@walletconnect/ethereum-provider": "^1.7.8",
     "@web3-react/core": "8.0.33-beta.0",

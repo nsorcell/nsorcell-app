@@ -1,6 +1,7 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit"
 import { Web3State } from "types/store"
 import {
+  addressesReceived,
   connect,
   disconnect,
   switchChain,
@@ -12,6 +13,9 @@ const initialState: Web3State = {
   chainId: 1,
   provider: null,
   waitingForApproval: false,
+  addresses: {
+    lottery6: "",
+  },
 }
 
 const ethersSlice = createSlice({
@@ -34,8 +38,13 @@ const ethersSlice = createSlice({
       }))
     ),
     switchChain: createReducer(initialState, (build) =>
-      build.addCase(switchChain, (state, action) => {
-        state.chainId = action.payload
+      build.addCase(switchChain, (state, { payload }) => {
+        state.chainId = payload
+      })
+    ),
+    addressesReceived: createReducer(initialState, (build) =>
+      build.addCase(addressesReceived, (state, { payload }) => {
+        state.addresses = payload
       })
     ),
   },

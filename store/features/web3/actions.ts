@@ -30,3 +30,14 @@ export const toggleWaitForApproval = createAction<
   undefined,
   typeof TOGGLE_WAIT_FOR_TRANSACTION
 >(TOGGLE_WAIT_FOR_TRANSACTION)
+
+const FETCH_ADDRESSES = "web3/fetchAddresses"
+export const fetchAddresses = createAction<undefined, typeof FETCH_ADDRESSES>(
+  FETCH_ADDRESSES
+)
+
+const ADDRESSES_RECEIVED = "web3/addressesReceived"
+export const addressesReceived = createAction<
+  Web3State["addresses"],
+  typeof ADDRESSES_RECEIVED
+>(ADDRESSES_RECEIVED)

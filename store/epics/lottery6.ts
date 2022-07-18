@@ -1,7 +1,5 @@
-import { providers } from "@0xsequence/multicall"
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { AnyAction, isAnyOf } from "@reduxjs/toolkit"
-import { LOTTERY_6 } from "config/contract-addresses"
 import { notify } from "config/toast-settings"
 import { parseEther } from "ethers/lib/utils"
 import { combineEpics, Epic } from "redux-observable"
@@ -22,9 +20,10 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
     filter(fetchStats.match),
     switchMap(() => {
       const { web3 } = state$.value
+
       const lotteryContract = Lottery6__factory.connect(
-        LOTTERY_6[web3.chainId],
-        new providers.MulticallProvider(web3.provider!)
+        web3.addresses.lottery6,
+        web3.provider!.getSigner()
       )
 
       return from(
@@ -49,7 +48,7 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
       const { web3 } = state$.value
 
       const lotteryContract = Lottery6__factory.connect(
-        LOTTERY_6[web3.chainId],
+        web3.addresses.lottery6,
         web3.provider!.getSigner()
       )
 

@@ -1,3 +1,4 @@
+import Loader from "components/loader"
 import { GradientText, Text } from "components/typography"
 import { formatEther } from "ethers/lib/utils"
 import { useAppSelector } from "hooks/store"
@@ -22,8 +23,15 @@ const Heading: FC = () => {
         {t("byEntering")}
       </Text>
 
-      <Text variant="h5" tw="text-gray-400 mt-6">
-        {t("lotteryState", { state })}
+      <Text variant="h5" tw="flex text-gray-400 mt-6">
+        {t("lotteryState")}
+        {state === "INITIAL" ? (
+          <div tw="relative w-20 h-8">
+            <Loader size="md" />
+          </div>
+        ) : (
+          state
+        )}
       </Text>
       <Text variant="subtitle1" tw="text-gray-400 mt-6">
         {t("chooseInstructions", { number: 6 })}

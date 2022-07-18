@@ -1,6 +1,6 @@
-import { LOTTERY_6 } from "config/contract-addresses"
+import { REGISTRY } from "config/contract-addresses"
 
-export type ChainId = keyof typeof LOTTERY_6
+export type ChainId = keyof typeof REGISTRY
 
 export enum LotteryEvents {
   DRAW = "Lottery6__Draw",

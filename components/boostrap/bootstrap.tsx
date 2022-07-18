@@ -1,5 +1,4 @@
 import { Lottery6__factory } from "@nsorcell/protocol"
-import { LOTTERY_6 } from "config/contract-addresses"
 import { useAppDispatch, useAppSelector } from "hooks/store"
 import useIsConnected from "hooks/useIsConnected"
 import { FC, useEffect } from "react"
@@ -17,14 +16,14 @@ const Bootstrap: FC = () => {
   const dispatch = useAppDispatch()
 
   const { isConnected } = useIsConnected()
-  const { provider, chainId } = useAppSelector((state) => state.web3)
+  const { provider, addresses } = useAppSelector((state) => state.web3)
 
   useEffect(() => {
     if (isConnected) {
       dispatch(bootstrap())
 
       const lotteryContract = Lottery6__factory.connect(
-        LOTTERY_6[chainId],
+        addresses.lottery6,
         provider!.getSigner()
       )
 

@@ -2,7 +2,7 @@ import { AnyAction } from "@reduxjs/toolkit"
 import { notify } from "config/toast-settings"
 import { combineEpics, Epic } from "redux-observable"
 
-import { filter, ignoreElements, map, tap } from "rxjs"
+import { filter, map, tap } from "rxjs"
 import { State } from "store"
 import {
   noWinners,
@@ -27,7 +27,7 @@ const drawRequestedEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
   action$.pipe(
     filter(requestedDraw.match),
     tap(() => notify(globalT("events:drawRequested"))),
-    ignoreElements()
+    map(() => fetchStats())
   )
 
 const numbersDrawnEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
@@ -40,7 +40,7 @@ const numbersDrawnEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
         })
       )
     ),
-    ignoreElements()
+    map(() => fetchStats())
   )
 
 const noWinnersEpic: Epic<AnyAction, AnyAction, State> = (action$) =>

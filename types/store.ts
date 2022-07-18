@@ -10,6 +10,9 @@ export interface Web3State {
   account: string
   chainId: ChainId
   provider: Web3Provider | null
+  addresses: {
+    lottery6: string
+  }
   waitingForApproval?: boolean
 }
 
