@@ -3,7 +3,7 @@ import { Web3State } from "types/store"
 import { ChainId } from "types/web3"
 
 const CONNECT = "web3/connect"
-export const connect = createAction<Web3State, typeof CONNECT>(CONNECT)
+export const connect = createAction<Partial<Web3State>, typeof CONNECT>(CONNECT)
 
 const DISCONNECT = "web3/disconnect"
 export const disconnect = createAction<undefined, typeof DISCONNECT>(DISCONNECT)
