@@ -1,7 +1,6 @@
 import { Text } from "components/typography"
 import { GradientIcon } from "components/typography/text"
 import { ComponentProps } from "react"
-import { FaExternalLinkAlt } from "react-icons/fa"
 import { MdNotificationsActive } from "react-icons/md"
 import { toast, ToastContainer } from "react-toastify"
 import { theme } from "twin.macro"
@@ -11,23 +10,15 @@ export const ToastContainerSettings: ComponentProps<typeof ToastContainer> = {
   autoClose: 5000,
   newestOnTop: true,
   closeOnClick: true,
-  rtl: false,
+  rtl: true,
   hideProgressBar: true,
   theme: "dark",
 }
 
-export const notify = (
-  message: string,
-  options?: {
-    injectUrl: string
-  }
-) => {
-  // split by # but keep the delimiter
-  const splitMessage = message.split(/(#)/g)
-
+export const notify = (message: string) => {
   toast(
     <Text variant="body1" tw="text-left">
-      <div tw="flex items-center p-2 word-break[break-all]">
+      <div tw="flex items-center p-2">
         <>
           <span tw="mr-8">
             <MdNotificationsActive
@@ -36,19 +27,10 @@ export const notify = (
               style={{ fill: "url(#gradient-toaster-icon)" }}
             />
           </span>
-          {options?.injectUrl
-            ? splitMessage.map((text) => {
-                text === "#" ? (
-                  <a href={options.injectUrl} target="_blank">
-                    <FaExternalLinkAlt size={28} />
-                  </a>
-                ) : (
-                  ` ${text} `
-                )
-              })
-            : message}
+          {message}
           <GradientIcon
             name="toaster-icon"
+            tw="mx-2"
             colorStops={[
               { color: theme`colors[gradient-1]`, offset: "0%" },
               { color: theme`colors[gradient-2]`, offset: "33%" },

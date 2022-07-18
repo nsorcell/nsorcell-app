@@ -1,6 +1,7 @@
 import { Text } from "components/typography"
 import { NetworkAttribute, networkSelectionConfig } from "config/networks"
 import { useAppDispatch } from "hooks/store"
+import { useTranslation } from "next-i18next"
 import { FC, useCallback } from "react"
 import { initiateSwitchChain } from "store/features/web3/actions"
 import "twin.macro"
@@ -12,11 +13,16 @@ interface ListItemProps extends NetworkAttribute {
 }
 
 export const ListItem: FC<ListItemProps> = ({ label, icon, onClick }) => {
+  const { t } = useTranslation("header")
   return (
     <MenuItem tabIndex={0} role="menuitem" onClick={onClick} className="group">
       <Text variant="body1" tw="flex items-center gap-4">
-        <span tw="animate-wiggle group-hover:animate-spin">{icon && icon}</span>
-        {label}
+        <>
+          <span tw="animate-wiggle group-hover:animate-spin">
+            {icon && icon}
+          </span>
+          {t(label as any)}
+        </>
       </Text>
     </MenuItem>
   )

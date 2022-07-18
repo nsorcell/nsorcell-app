@@ -25,3 +25,8 @@ const WINNERS = "events/winners"
 export const winners = createAction<{ winners: string[] }, typeof WINNERS>(
   WINNERS
 )
+
+const EVENT_TRIGGERED = "events/eventTriggered"
+export const eventTriggered = createAction<any, typeof EVENT_TRIGGERED>(
+  EVENT_TRIGGERED
+)

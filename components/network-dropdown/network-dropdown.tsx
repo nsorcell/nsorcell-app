@@ -54,7 +54,11 @@ const NetworkDropdown: FC = () => {
           <Text variant="body1" tw="text-white">
             {t("network")}:{" "}
             <GradientText tw="font-bold">
-              {networkSelectionConfig[chainId].label.split(" ")[0]}
+              {
+                (
+                  t(networkSelectionConfig[chainId].label as any) as string
+                ).split(" ")[0]
+              }
             </GradientText>
           </Text>
           <FaChevronDown size={16} tw="ml-2 text-gray-200" />

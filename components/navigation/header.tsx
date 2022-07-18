@@ -9,6 +9,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { FC, ReactNode, useState } from "react"
 import { FaDev, FaHome, FaInfoCircle, FaLink, FaUserAlt } from "react-icons/fa"
+import { TbNumbers } from "react-icons/tb"
 import tw from "twin.macro"
 import { shortenAddress } from "utils/address"
 
@@ -62,6 +63,11 @@ const Header: FC = () => {
               label={t("menu.home")}
               href="/"
               icon={<FaHome size={20} />}
+            />
+            <MenuListItem
+              label={t("menu.results")}
+              href="results"
+              icon={<TbNumbers size={20} />}
             />
             <MenuListItem
               label={t("menu.about")}

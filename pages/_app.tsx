@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify"
 import { store } from "store"
 import "styles/globals.css"
 
-import DataLoader from "components/data-loader"
+import Boostrap from "components/boostrap"
 import { ToastContainerSettings } from "config/toast-settings"
 import { FC, ReactNode } from "react"
 
@@ -19,7 +19,7 @@ const ActiveApp: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
       <GlobalStyles />
-      <DataLoader />
+      <Boostrap />
       <Layout>{children}</Layout>
     </>
   )

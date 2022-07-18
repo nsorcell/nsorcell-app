@@ -3,7 +3,8 @@
   "menu": {
     "about": "About",
     "devlog": "Devlog",
-    "home": "Home"
+    "home": "Home",
+    "results": "Results"
   },
   "network": "Network",
   "networks": {
