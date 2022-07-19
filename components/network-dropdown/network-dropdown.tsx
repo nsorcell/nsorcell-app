@@ -37,7 +37,7 @@ const NetworkDropdown: FC = () => {
 
   return (
     <div
-      tw="w-full relative inline-block text-left max-w-[250px] z-50"
+      tw="relative inline-block text-left min-w-[250px] z-50"
       ref={dropdownRef}
     >
       <span tw="rounded-md shadow-sm">
