@@ -4,14 +4,25 @@ import { REGISTRY } from "config/contract-addresses"
 import { ethers } from "ethers"
 import { combineEpics, Epic } from "redux-observable"
 
-import { catchError, filter, from, map, of, switchMap } from "rxjs"
+import {
+  catchError,
+  filter,
+  from,
+  ignoreElements,
+  map,
+  of,
+  switchMap,
+  tap,
+} from "rxjs"
 import { State } from "store"
 import {
   addressesReceived,
+  externalDisconnect,
   fetchAddresses,
   initiateSwitchChain,
   switchChain,
 } from "store/features/web3/actions"
+import ls from "utils/local-storage"
 import { injectedProvider } from "utils/rpc"
 
 const switchChainEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
@@ -50,6 +61,17 @@ const fetchAddressesEpic: Epic<AnyAction, AnyAction, State> = (
     map(([lottery6]) => addressesReceived({ lottery6 }))
   )
 
-const web3Epic = combineEpics(switchChainEpic, fetchAddressesEpic)
+const disconnectEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
+  action$.pipe(
+    filter(externalDisconnect.match),
+    tap(() => ls.remove("user-wallet")),
+    ignoreElements()
+  )
+
+const web3Epic = combineEpics(
+  switchChainEpic,
+  fetchAddressesEpic,
+  disconnectEpic
+)
 
 export default web3Epic

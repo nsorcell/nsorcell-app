@@ -9,13 +9,7 @@ import ls from "utils/local-storage"
 import { useAppDispatch } from "./store"
 
 const useConnectionManager = () => {
-  const {
-    account,
-    isActive,
-    chainId,
-    provider,
-    connector: activeConnector,
-  } = useWeb3React<Web3Provider>()
+  const { account, isActive, chainId, provider } = useWeb3React<Web3Provider>()
   const connectorType = useRef<ConnectorNames>()
 
   const dispatch = useAppDispatch()
@@ -26,7 +20,7 @@ const useConnectionManager = () => {
     if (account && walletType) {
       handleConnect(walletType)
     }
-  }, [isActive])
+  }, [])
 
   const handleConnect = async (walletType: ConnectorNames) => {
     connectorType.current = walletType

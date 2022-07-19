@@ -8,6 +8,12 @@ export const connect = createAction<Partial<Web3State>, typeof CONNECT>(CONNECT)
 const DISCONNECT = "web3/disconnect"
 export const disconnect = createAction<undefined, typeof DISCONNECT>(DISCONNECT)
 
+const EXTERNAL_DISCONNECT = "web3/externalDisconnect"
+export const externalDisconnect = createAction<
+  undefined,
+  typeof EXTERNAL_DISCONNECT
+>(EXTERNAL_DISCONNECT)
+
 const INITIATE_SWITCH_CHAIN = "web3/initiateSwitchChain"
 export const initiateSwitchChain = createAction<
   ChainId,

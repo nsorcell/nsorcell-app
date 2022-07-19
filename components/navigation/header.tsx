@@ -8,12 +8,12 @@ import "twin.macro"
 import { HeaderContainer } from "./navigation.styled"
 
 const Header: FC = () => {
-  const { isActive, walletType } = useIsConnected()
+  const { walletType } = useIsConnected()
   const { handleConnect, handleDisconnect } = useConnectionManager()
   const [modalIsOpen, setIsOpen] = useState(false)
 
   const onConnect = () => {
-    if (isActive && walletType) {
+    if (walletType) {
       return handleConnect(walletType)
     }
 
