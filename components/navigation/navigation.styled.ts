@@ -6,6 +6,4 @@ export const FooterContainer = styled.footer(() => [
   tw`md:h-[188px] md:justify-end md:px-24`,
 ])
 
-export const HeaderContainer = styled.header(() => [
-  tw`flex w-full h-24 justify-between`,
-])
+export const HeaderContainer = tw.header`w-full flex justify-between items-center py-4 px-4 md:py-8`

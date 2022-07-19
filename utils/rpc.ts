@@ -28,7 +28,8 @@ export const injectedProvider = () => {
 export const initialChainId = () => {
   const ip = injectedProvider()
 
-  return ip ? (parseInt(ip?.chainId!, 16) as ChainId) : 1
+  // For now only rinkeby deployment, so set 4 as default to avoid ssr error
+  return ip ? (parseInt(ip?.chainId!, 16) as ChainId) : 4
 }
 
 export const initialProvider = () => {
