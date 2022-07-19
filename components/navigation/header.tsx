@@ -55,7 +55,7 @@ const WalletConnector: FC<WalletConnectorProps> = ({
   const { t } = useTranslation("header")
   return isConnected ? (
     <>
-      <div tw="w-full hidden md:visible md:display[inline-flex]">
+      <div tw="hidden md:visible md:display[inline-flex]">
         <NetworkDropdown />
       </div>
 
