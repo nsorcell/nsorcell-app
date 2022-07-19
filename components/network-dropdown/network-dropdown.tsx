@@ -56,7 +56,9 @@ const NetworkDropdown: FC = () => {
             <GradientText tw="font-bold">
               {
                 (
-                  t(networkSelectionConfig[chainId].label as any) as string
+                  t(
+                    (networkSelectionConfig[chainId]?.label as any) ?? ""
+                  ) as string
                 ).split(" ")[0]
               }
             </GradientText>
