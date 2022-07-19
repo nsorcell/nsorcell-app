@@ -2,7 +2,6 @@ import Loader from "components/loader"
 import { GradientText, Text } from "components/typography"
 import { formatEther } from "ethers/lib/utils"
 import { useAppSelector } from "hooks/store"
-import useIsConnected from "hooks/useIsConnected"
 import { useTranslation } from "next-i18next"
 import { FC } from "react"
 import "twin.macro"
@@ -10,7 +9,6 @@ import { HeadingContainer } from "./heading.styled"
 
 const Heading: FC = () => {
   const { state, prizePool } = useAppSelector((state) => state.lottery)
-  const { isConnected } = useIsConnected()
   const { t } = useTranslation("heading")
 
   return (
@@ -27,7 +25,7 @@ const Heading: FC = () => {
 
       <Text variant="h5" tw="flex text-gray-400 mt-6">
         {t("lotteryState")}
-        {isConnected && state === "INITIAL" ? (
+        {state === "INITIAL" ? (
           <div tw="relative w-20 h-8">
             <Loader size="md" />
           </div>

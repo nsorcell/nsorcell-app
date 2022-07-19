@@ -42,7 +42,7 @@ const fetchAddressesEpic: Epic<AnyAction, AnyAction, State> = (
 
       const registryContract = Registry__factory.connect(
         REGISTRY[web3.chainId],
-        web3.provider!.getSigner()
+        web3.provider!
       )
 
       return from(Promise.all([registryContract.getLottery6Address()]))

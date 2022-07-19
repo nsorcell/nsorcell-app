@@ -1,3 +1,4 @@
+import { providers } from "@0xsequence/multicall"
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { AnyAction, isAnyOf } from "@reduxjs/toolkit"
 import { notify } from "config/toast-settings"
@@ -23,7 +24,7 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
 
       const lotteryContract = Lottery6__factory.connect(
         web3.addresses.lottery6,
-        web3.provider!.getSigner()
+        new providers.MulticallProvider(web3.provider)
       )
 
       return from(

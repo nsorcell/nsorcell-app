@@ -9,8 +9,9 @@ export const localRPCMatic = "http://localhost:8540"
 // Ethereum
 export const RPCMainnet =
   process.env.ALCHEMY_RPC_MAINNET || "https://eth-mainnet.public.blastapi.io"
-export const RPCGoerli =
-  process.env.ALCHEMY_RPC_GOERLI || "https://rpc.goerli.mudit.blog	"
+export const RPCRinkeby =
+  process.env.ALCHEMY_RPC_RINKEBY ||
+  "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161	"
 
 // Polygon
 export const RPCMatic =
@@ -34,5 +35,7 @@ export const initialChainId = () => {
 
 export const initialProvider = () => {
   const chainId = initialChainId()
+  console.log(RPC_URLS[chainId])
+  console.log(RPC_URLS)
   return new ethers.providers.JsonRpcProvider(RPC_URLS[chainId])
 }

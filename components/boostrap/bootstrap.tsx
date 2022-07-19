@@ -1,7 +1,6 @@
 import { Lottery6__factory } from "@nsorcell/protocol"
 import { BigNumber } from "ethers"
 import { useAppDispatch, useAppSelector } from "hooks/store"
-import useIsConnected from "hooks/useIsConnected"
 import { FC, useEffect } from "react"
 import { bootstrap } from "store/features/common/actions"
 import {
@@ -16,46 +15,43 @@ import { LotteryEvents } from "types/web3"
 const Bootstrap: FC = () => {
   const dispatch = useAppDispatch()
 
-  const { isConnected } = useIsConnected()
   const { provider, addresses } = useAppSelector((state) => state.web3)
 
   useEffect(() => {
-    if (isConnected) {
-      dispatch(bootstrap())
+    dispatch(bootstrap())
 
-      const lotteryContract = Lottery6__factory.connect(
-        addresses.lottery6,
-        provider
+    const lotteryContract = Lottery6__factory.connect(
+      addresses.lottery6,
+      provider
+    )
+
+    lotteryContract
+      .on(LotteryEvents.ENTER, (address) =>
+        dispatch(playerEntered({ address }))
       )
-
-      lotteryContract
-        .on(LotteryEvents.ENTER, (address) =>
-          dispatch(playerEntered({ address }))
+      .on(LotteryEvents.REQUESTED_DRAW, () => dispatch(requestedDraw()))
+      .on(LotteryEvents.DRAW, (winningNumbers) => {
+        dispatch(
+          numbersDrawn({
+            winningNumbers: winningNumbers
+              .map((n: BigNumber) => n.toString())
+              .join(", "),
+          })
         )
-        .on(LotteryEvents.REQUESTED_DRAW, () => dispatch(requestedDraw()))
-        .on(LotteryEvents.DRAW, (winningNumbers) => {
-          dispatch(
-            numbersDrawn({
-              winningNumbers: winningNumbers
-                .map((n: BigNumber) => n.toString())
-                .join(", "),
-            })
-          )
-        })
-        .on(LotteryEvents.NO_WINNERS, () => dispatch(noWinners()))
-        .on(LotteryEvents.WINNERS, (event) => {
-          dispatch(winners({ winners: [] }))
-        })
+      })
+      .on(LotteryEvents.NO_WINNERS, () => dispatch(noWinners()))
+      .on(LotteryEvents.WINNERS, () => {
+        dispatch(winners({ winners: [] }))
+      })
 
-      return () => {
-        lotteryContract.removeAllListeners(LotteryEvents.ENTER)
-        lotteryContract.removeAllListeners(LotteryEvents.REQUESTED_DRAW)
-        lotteryContract.removeAllListeners(LotteryEvents.DRAW)
-        lotteryContract.removeAllListeners(LotteryEvents.NO_WINNERS)
-        lotteryContract.removeAllListeners(LotteryEvents.WINNERS)
-      }
+    return () => {
+      lotteryContract.removeAllListeners(LotteryEvents.ENTER)
+      lotteryContract.removeAllListeners(LotteryEvents.REQUESTED_DRAW)
+      lotteryContract.removeAllListeners(LotteryEvents.DRAW)
+      lotteryContract.removeAllListeners(LotteryEvents.NO_WINNERS)
+      lotteryContract.removeAllListeners(LotteryEvents.WINNERS)
     }
-  }, [isConnected])
+  }, [])
   return null
 }
 

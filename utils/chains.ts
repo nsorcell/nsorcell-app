@@ -2,15 +2,15 @@ import type { AddEthereumChainParameter } from "@web3-react/types"
 import {
   localRPCEthereum,
   localRPCMatic,
-  RPCGoerli,
   RPCMainnet,
   RPCMatic,
   RPCMumbai,
+  RPCRinkeby,
 } from "./rpc"
 
 export const chainIds = {
   mainnet: 1,
-  goerli: 5,
+  rinkeby: 4,
   local: 1337,
   matic: 137,
   mumbai: 80001,
@@ -19,7 +19,7 @@ export const chainIds = {
 export const RPC_URLS: { [chainId: number]: string } = {
   [chainIds.mainnet]: RPCMainnet,
   [chainIds.local]: localRPCEthereum,
-  [chainIds.goerli]: RPCGoerli,
+  [chainIds.rinkeby]: RPCRinkeby,
   [chainIds.matic]: RPCMatic,
   [chainIds.local]: localRPCMatic,
   [chainIds.mumbai]: RPCMumbai,
@@ -28,7 +28,7 @@ export const RPC_URLS: { [chainId: number]: string } = {
 export const RPC_NAMES: { [chainId: number]: string } = {
   [chainIds.mainnet]: "Ethereum Mainnet",
   [chainIds.local]: "Ethereum Local",
-  [chainIds.goerli]: "Ethereum Goerli",
+  [chainIds.rinkeby]: "Ethereum Goerli",
   [chainIds.matic]: "Polygon Mainnet",
   [chainIds.local]: "Polygon Local",
   [chainIds.mumbai]: "Polygon Mumbai",
@@ -87,10 +87,10 @@ export const CHAINS: {
     nativeCurrency: ETH,
     name: RPC_NAMES[chainIds.mainnet],
   },
-  [chainIds.goerli]: {
-    urls: [RPC_URLS[chainIds.goerli]],
+  [chainIds.rinkeby]: {
+    urls: [RPC_URLS[chainIds.rinkeby]],
     nativeCurrency: ETH,
-    name: RPC_NAMES[chainIds.goerli],
+    name: RPC_NAMES[chainIds.rinkeby],
   },
   [chainIds.local]: {
     urls: [RPC_URLS[chainIds.local]],
