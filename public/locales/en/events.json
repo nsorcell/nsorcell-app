@@ -1,5 +1,5 @@
 {
-  "youEntered": "You have entered the lottery",
+  "youEntered": "You have entered the lottery.",
   "playerEntered": "The player {{player}} entered the lottery.",
   "drawRequested": "Lottery draw is in progress.",
   "numbersDrawn": "The winning numbers are the following: {{numbers}}",

@@ -14,6 +14,7 @@ import {
   fetchStatsReceived,
 } from "store/features/lottery6/actions"
 import { toggleWaitForApproval } from "store/features/web3/actions"
+import { globalT } from "utils/globalT"
 import { transformFetchStateResult } from "utils/store"
 
 const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
@@ -60,7 +61,7 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
       ).pipe(
         map(() => enterSuccessful()),
         tap(() => {
-          notify("Player entered the lottery.")
+          notify(globalT("events:youEntered"))
         }),
         catchError(() => of(enterFailed()))
       )
