@@ -1,4 +1,7 @@
 import { MetaMaskInpageProvider } from "@metamask/providers"
+import { ethers } from "ethers"
+import { ChainId } from "types/web3"
+import { RPC_URLS } from "./chains"
 // Local
 export const localRPCEthereum = "http://localhost:8545"
 export const localRPCMatic = "http://localhost:8540"
@@ -20,4 +23,15 @@ export const injectedProvider = () => {
   if (typeof window !== "undefined") {
     return window.ethereum as MetaMaskInpageProvider
   }
+}
+
+export const initialChainId = () => {
+  const ip = injectedProvider()
+
+  return ip ? (parseInt(ip?.chainId!, 16) as ChainId) : 1
+}
+
+export const initialProvider = () => {
+  const chainId = initialChainId()
+  return new ethers.providers.JsonRpcProvider(RPC_URLS[chainId])
 }

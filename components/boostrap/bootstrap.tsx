@@ -1,4 +1,5 @@
 import { Lottery6__factory } from "@nsorcell/protocol"
+import { BigNumber } from "ethers"
 import { useAppDispatch, useAppSelector } from "hooks/store"
 import useIsConnected from "hooks/useIsConnected"
 import { FC, useEffect } from "react"
@@ -24,7 +25,7 @@ const Bootstrap: FC = () => {
 
       const lotteryContract = Lottery6__factory.connect(
         addresses.lottery6,
-        provider!.getSigner()
+        provider
       )
 
       lotteryContract
@@ -32,13 +33,19 @@ const Bootstrap: FC = () => {
           dispatch(playerEntered({ address }))
         )
         .on(LotteryEvents.REQUESTED_DRAW, () => dispatch(requestedDraw()))
-        .on(LotteryEvents.DRAW, (event) =>
-          dispatch(numbersDrawn({ winningNumbers: event }))
-        )
+        .on(LotteryEvents.DRAW, (winningNumbers) => {
+          dispatch(
+            numbersDrawn({
+              winningNumbers: winningNumbers
+                .map((n: BigNumber) => n.toString())
+                .join(", "),
+            })
+          )
+        })
         .on(LotteryEvents.NO_WINNERS, () => dispatch(noWinners()))
-        .on(LotteryEvents.WINNERS, (event) =>
-          dispatch(winners({ winners: event }))
-        )
+        .on(LotteryEvents.WINNERS, (event) => {
+          dispatch(winners({ winners: [] }))
+        })
 
       return () => {
         lotteryContract.removeAllListeners(LotteryEvents.ENTER)

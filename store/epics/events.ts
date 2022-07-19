@@ -36,17 +36,23 @@ const numbersDrawnEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
     tap(({ payload }) =>
       notify(
         globalT("events:numbersDrawn", {
-          numbers: payload,
+          numbers: payload.winningNumbers,
         })
       )
     ),
     map(() => fetchStats())
   )
 
-const noWinnersEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
+const noWinnersEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(noWinners.match),
-    tap(() => notify(globalT("events:noWinners"))),
+    tap(() =>
+      notify(
+        globalT("events:noWinners", {
+          iteration: state$.value.lottery.numberOfDraws - 1,
+        })
+      )
+    ),
     map(() => fetchStats())
   )
 

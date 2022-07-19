@@ -1,5 +1,6 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit"
 import { Web3State } from "types/store"
+import { initialChainId, initialProvider } from "utils/rpc"
 import {
   addressesReceived,
   connect,
@@ -10,8 +11,8 @@ import {
 
 const initialState: Web3State = {
   account: "",
-  chainId: 1,
-  provider: null,
+  chainId: initialChainId(),
+  provider: initialProvider(),
   waitingForApproval: false,
   addresses: {
     lottery6: "",

@@ -1,3 +1,4 @@
+import "@nsorcell/protocol"
 import { REGISTRY } from "config/contract-addresses"
 
 export type ChainId = keyof typeof REGISTRY

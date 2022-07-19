@@ -1,4 +1,4 @@
-import type { Web3Provider } from "@ethersproject/providers"
+import type { JsonRpcProvider, Web3Provider } from "@ethersproject/providers"
 import { ChainId } from "./web3"
 
 export type History = Record<
@@ -9,7 +9,7 @@ export type History = Record<
 export interface Web3State {
   account: string
   chainId: ChainId
-  provider: Web3Provider | null
+  provider: Web3Provider | JsonRpcProvider
   addresses: {
     lottery6: string
   }
