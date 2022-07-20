@@ -12,8 +12,6 @@ const useConnectionManager = () => {
   const { account, isActive, chainId, provider } = useWeb3React<Web3Provider>()
   const connectorType = useRef<ConnectorNames>()
 
-  console.log(provider)
-
   const dispatch = useAppDispatch()
 
   useEffect(() => {
