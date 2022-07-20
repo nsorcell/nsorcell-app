@@ -25,7 +25,7 @@ const WalletConnector: FC<WalletConnectorProps> = ({
           <NetworkDropdown />
         </div>
       }
-      <div tw="mt-auto pb-4">
+      <div tw="mt-auto pb-4 md:pb-0 md:mt-0">
         {isConnected ? (
           <>
             <Button
