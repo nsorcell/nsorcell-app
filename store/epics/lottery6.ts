@@ -38,10 +38,11 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
           lotteryContract.getLastDrawTimestamp(),
           web3.provider!.getBalance(lotteryContract.address),
         ])
+      ).pipe(
+        map(pipe(transformFetchStateResult, fetchStatsReceived)),
+        catchError((err) => of(fetchFailed(err)))
       )
-    }),
-    map(pipe(transformFetchStateResult, fetchStatsReceived)),
-    catchError((err) => of(fetchFailed(err)))
+    })
   )
 
 const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
