@@ -1,10 +1,9 @@
 import { Global } from "@emotion/react"
 import "react-toastify/dist/ReactToastify.css"
-import tw, { css, GlobalStyles as BaseStyles, theme } from "twin.macro"
+import tw, { css, GlobalStyles as BaseStyles } from "twin.macro"
 
 const customStyles = css({
   body: {
-    WebkitTapHighlightColor: theme`colors.purple.500`,
     ...tw`antialiased`,
   },
 })

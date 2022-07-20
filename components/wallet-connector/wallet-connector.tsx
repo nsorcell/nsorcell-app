@@ -18,26 +18,32 @@ const WalletConnector: FC<WalletConnectorProps> = ({
 }) => {
   const { account, isConnected } = useIsConnected()
   const { t } = useTranslation("header")
-  return isConnected ? (
+  return (
     <>
-      <div tw="hidden md:visible md:display[inline-flex]">
-        <NetworkDropdown />
-      </div>
-
-      <Button
-        label={shortenAddress(account!)}
-        onClick={() => {
-          handleDisconnect()
-        }}
-        icon={{ position: "left", component: <FaUserAlt size={16} /> }}
-      />
+      {
+        <div tw="hidden md:visible md:display[inline-flex]">
+          <NetworkDropdown />
+        </div>
+      }
+      {isConnected ? (
+        <>
+          <Button
+            tw="mt-auto"
+            label={shortenAddress(account!)}
+            onClick={() => {
+              handleDisconnect()
+            }}
+            icon={{ position: "left", component: <FaUserAlt size={16} /> }}
+          />
+        </>
+      ) : (
+        <Button
+          label={t("connect")}
+          onClick={handleConnect}
+          icon={{ position: "right", component: <FaLink size={20} /> }}
+        />
+      )}
     </>
-  ) : (
-    <Button
-      label={t("connect")}
-      onClick={handleConnect}
-      icon={{ position: "right", component: <FaLink size={20} /> }}
-    />
   )
 }
 
