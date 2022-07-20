@@ -13,6 +13,7 @@ const Header: FC = () => {
   const [modalIsOpen, setIsOpen] = useState(false)
 
   const onConnect = () => {
+    console.log(walletType)
     if (walletType) {
       return handleConnect(walletType)
     }

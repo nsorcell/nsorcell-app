@@ -35,7 +35,6 @@ export const initialChainId = () => {
 
 export const initialProvider = () => {
   const chainId = initialChainId()
-  console.log(RPC_URLS[chainId])
-  console.log(RPC_URLS)
+
   return new ethers.providers.JsonRpcProvider(RPC_URLS[chainId])
 }
