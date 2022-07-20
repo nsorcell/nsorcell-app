@@ -104,6 +104,7 @@ const NetworkDropdown: FC = () => {
           )}
           <div tw="py-1">
             <a
+              href="#"
               onClick={() => {
                 dispatch(disconnect())
                 toggleDropdown(false)()

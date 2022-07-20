@@ -11,7 +11,7 @@ const MenuListItem: FC<{ label: string; href?: string; icon?: ReactNode }> = ({
   return (
     <li tw="flex justify-center items-center my-6 md:my-0 md:mr-20 cursor-pointer">
       <Link href={href}>
-        <a tw="flex">
+        <a href="#" tw="flex">
           <span tw="flex items-center mr-2">{icon}</span>
           <Text variant="body1" tw="text-xl md:text-base">
             {label}
