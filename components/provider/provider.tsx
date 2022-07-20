@@ -20,7 +20,7 @@ const connectors: [Connector, Web3ReactHooks][] = [
 ]
 
 const Provider: FC<{ children: ReactNode }> = ({ children }) => (
-  <Web3ReactProvider lookupENS connectors={connectors}>
+  <Web3ReactProvider lookupENS connectors={connectors} network="any">
     {children}
   </Web3ReactProvider>
 )

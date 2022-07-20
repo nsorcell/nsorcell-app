@@ -41,6 +41,7 @@ const ethersSlice = createSlice({
     switchChain: createReducer(initialState, (build) =>
       build.addCase(switchChain, (state, { payload }) => {
         state.chainId = payload
+        state.provider = state.provider
       })
     ),
     addressesReceived: createReducer(initialState, (build) =>

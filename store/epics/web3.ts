@@ -19,6 +19,7 @@ import {
   addressesReceived,
   externalDisconnect,
   fetchAddresses,
+  fetchFailed,
   initiateSwitchChain,
   switchChain,
 } from "store/features/web3/actions"
@@ -56,9 +57,11 @@ const fetchAddressesEpic: Epic<AnyAction, AnyAction, State> = (
         web3.provider!
       )
 
-      return from(Promise.all([registryContract.getLottery6Address()]))
-    }),
-    map(([lottery6]) => addressesReceived({ lottery6 }))
+      return from(Promise.all([registryContract.getLottery6Address()])).pipe(
+        map(([lottery6]) => addressesReceived({ lottery6 })),
+        catchError((err) => of(fetchFailed(err)))
+      )
+    })
   )
 
 const disconnectEpic: Epic<AnyAction, AnyAction, State> = (action$) =>

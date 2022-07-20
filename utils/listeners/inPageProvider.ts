@@ -1,6 +1,7 @@
 import is from "ramda/src/is"
 import { AppDispatch } from "store"
-import { externalDisconnect } from "store/features/web3/actions"
+import { externalDisconnect, switchChain } from "store/features/web3/actions"
+import { ChainId } from "types/web3"
 import { injectedProvider } from "utils/rpc"
 
 export const listenToInPageProviderEvents = (dispatch: AppDispatch) => {
@@ -12,7 +13,14 @@ export const listenToInPageProviderEvents = (dispatch: AppDispatch) => {
     }
   })
 
+  injected?.on("chainChanged", (chainId) => {
+    if (is(String, chainId)) {
+      const numericChainId = parseInt(chainId, 16) as ChainId
+      dispatch(switchChain(numericChainId))
+    }
+  })
   return () => {
     injected?.removeAllListeners("accountsChanged")
+    injected?.removeAllListeners("chainChanged")
   }
 }

@@ -13,7 +13,7 @@ import {
   fetchStats,
   fetchStatsReceived,
 } from "store/features/lottery6/actions"
-import { toggleWaitForApproval } from "store/features/web3/actions"
+import { fetchFailed, toggleWaitForApproval } from "store/features/web3/actions"
 import { globalT } from "utils/globalT"
 import { transformFetchStateResult } from "utils/store"
 
@@ -40,7 +40,8 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
         ])
       )
     }),
-    map(pipe(transformFetchStateResult, fetchStatsReceived))
+    map(pipe(transformFetchStateResult, fetchStatsReceived)),
+    catchError((err) => of(fetchFailed(err)))
   )
 
 const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>

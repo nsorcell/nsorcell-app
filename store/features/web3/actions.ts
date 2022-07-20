@@ -47,3 +47,8 @@ export const addressesReceived = createAction<
   Web3State["addresses"],
   typeof ADDRESSES_RECEIVED
 >(ADDRESSES_RECEIVED)
+
+const FETCH_FAILED = "web3/fetchFailed"
+export const fetchFailed = createAction<{ error: any }, typeof FETCH_FAILED>(
+  FETCH_FAILED
+)

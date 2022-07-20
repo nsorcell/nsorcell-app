@@ -28,6 +28,7 @@ const useConnectionManager = () => {
 
     if (walletType == ConnectorNames.WalletConnect && connector.deactivate) {
       connector.deactivate()
+      ls.remove("user-wallet")
     }
 
     try {
