@@ -4,7 +4,7 @@ const { i18n } = require("./next-i18next.config")
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: true,
   i18n,
   env: {
     ALCHEMY_RPC_MAINNET: process.env.ALCHEMY_RPC_MAINNET,
@@ -14,7 +14,7 @@ const nextConfig = {
     NEXT_PUBLIC_GOOGLE_ANALYTICS: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
   },
   productionBrowserSourceMaps: true,
-  optimizeFonts: false,
+  optimizeFonts: true,
 }
 
 module.exports = nextConfig

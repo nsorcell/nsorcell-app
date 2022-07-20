@@ -30,7 +30,11 @@ const Header: FC = () => {
 
   return (
     <HeaderContainer>
-      <img src="/images/nsorcell.svg" tw="w-14 h-14 md:w-20 md:h-20 md:ml-20" />
+      <img
+        src="/images/nsorcell.svg"
+        tw="w-14 h-14 md:w-20 md:h-20 md:ml-20"
+        alt="Nsorcell"
+      />
       <MobileMenu>{connector}</MobileMenu>
       <div tw="hidden items-center w-full px-16 md:visible md:flex">
         <div tw="w-full flex items-center justify-end gap-4">
