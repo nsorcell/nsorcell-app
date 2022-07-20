@@ -8,7 +8,7 @@ export default class MyDocument extends Document {
         <Head>
           <meta
             name="description"
-            content="Nsorcell Blockchain Lottery. Win crypto by playing in the lottery."
+            content="Developer: Daniel Tok Nsorcell, Design: Alexandra Vivien Weber, Category: Blockchain"
           />
           <meta
             name="viewport"
