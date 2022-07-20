@@ -4,19 +4,11 @@ import { REGISTRY } from "config/contract-addresses"
 import { ethers } from "ethers"
 import { combineEpics, Epic } from "redux-observable"
 
-import {
-  catchError,
-  filter,
-  from,
-  ignoreElements,
-  map,
-  of,
-  switchMap,
-  tap,
-} from "rxjs"
+import { catchError, filter, from, map, of, switchMap, tap } from "rxjs"
 import { State } from "store"
 import {
   addressesReceived,
+  disconnect,
   externalDisconnect,
   fetchAddresses,
   fetchFailed,
@@ -68,7 +60,7 @@ const disconnectEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
   action$.pipe(
     filter(externalDisconnect.match),
     tap(() => ls.remove("user-wallet")),
-    ignoreElements()
+    map(() => disconnect())
   )
 
 const web3Epic = combineEpics(
