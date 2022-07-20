@@ -1,9 +1,9 @@
 import tw, { styled } from "twin.macro"
 
 export const LotteryContainer = styled.div(() => [
-  tw`max-w-sm p-10 mt-16`,
+  tw`max-w-sm p-10 mt-16 mb-40`,
   tw`bg-lottery-bg/40 backdrop-blur-md border-radius[24px] shadow-lg`,
-  tw`md:mt-0 md:max-w-full`,
+  tw`md:mt-0 md:mb-0 md:max-w-full`,
 ])
 
 export const NumberContainer = styled.div(() => [

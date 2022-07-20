@@ -38,6 +38,7 @@ const useConnectionManager = () => {
     } catch (e: any) {
       if (e.name === "NoMetaMaskError") {
         console.info("Waiting for MetaMask...")
+        await connector.connectEagerly!()
       }
     }
   }

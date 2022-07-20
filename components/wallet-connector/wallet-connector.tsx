@@ -25,24 +25,27 @@ const WalletConnector: FC<WalletConnectorProps> = ({
           <NetworkDropdown />
         </div>
       }
-      {isConnected ? (
-        <>
+      <div tw="mt-auto pb-4">
+        {isConnected ? (
+          <>
+            <Button
+              tw="mt-auto"
+              label={shortenAddress(account!)}
+              onClick={() => {
+                handleDisconnect()
+              }}
+              icon={{ position: "left", component: <FaUserAlt size={16} /> }}
+            />
+          </>
+        ) : (
           <Button
             tw="mt-auto"
-            label={shortenAddress(account!)}
-            onClick={() => {
-              handleDisconnect()
-            }}
-            icon={{ position: "left", component: <FaUserAlt size={16} /> }}
+            label={t("connect")}
+            onClick={handleConnect}
+            icon={{ position: "right", component: <FaLink size={20} /> }}
           />
-        </>
-      ) : (
-        <Button
-          label={t("connect")}
-          onClick={handleConnect}
-          icon={{ position: "right", component: <FaLink size={20} /> }}
-        />
-      )}
+        )}
+      </div>
     </>
   )
 }
