@@ -2,18 +2,18 @@ import { Menu, MobileMenu } from "components/menu"
 import { WalletModal } from "components/modal"
 import WalletConnector from "components/wallet-connector"
 import useConnectionManager from "hooks/useConnectionManager"
-import useIsConnected from "hooks/useIsConnected"
 import { FC, useState } from "react"
 import "twin.macro"
+import ls from "utils/local-storage"
 import { HeaderContainer } from "./navigation.styled"
 
 const Header: FC = () => {
-  const { walletType } = useIsConnected()
   const { handleConnect, handleDisconnect } = useConnectionManager()
   const [modalIsOpen, setIsOpen] = useState(false)
 
   const onConnect = () => {
-    console.log(walletType)
+    let { walletType } = ls.get("user-wallet")
+
     if (walletType) {
       return handleConnect(walletType)
     }
