@@ -34,13 +34,17 @@ export const getDefaultProvider = (defaultChainId: ChainId) => {
 }
 
 export const getDefaultChain = (state: AddressState): ChainId => {
+  // Get the arbitrary first address configuration
   const [anyAddressState] = Object.values(state) as SupportedChainList[]
+
+  // Get the first one of the configured chainIds
   const [firstChain] = Object.keys(anyAddressState)
 
   return parseInt(firstChain) as ChainId
 }
 
 export const getSupportedChains = async (): Promise<SupportedChainList> => {
+  // Read the configured RPC_URLS, and see which one we can fetch
   return Object.fromEntries(
     (
       await Promise.all(
