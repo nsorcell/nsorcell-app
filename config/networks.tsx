@@ -10,7 +10,10 @@ export type NetworkAttribute = {
   type: "mainnet" | "testnet" | "local"
 }
 
-export const networkSelectionConfig: Record<ChainId, NetworkAttribute> = {
+export const networkSelectionConfig: Record<
+  Exclude<ChainId, 0>,
+  NetworkAttribute
+> = {
   1: {
     icon: <FaEthereum size={20} />,
     label: "networks.mainnet",
