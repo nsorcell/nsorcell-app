@@ -16,10 +16,12 @@ const addressSlice = createSlice({
     ),
   },
   extraReducers: {
-    [HYDRATE]: (state: any = {}, action: PayloadAction) => {
+    [HYDRATE]: (
+      state: any = {},
+      action: PayloadAction<{ address: AddressState }>
+    ) => {
       if (action.type === HYDRATE) {
-        //@ts-ignore
-        return { ...action.payload.address }
+        return action.payload.address
       }
 
       return state

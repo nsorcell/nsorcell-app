@@ -11,7 +11,7 @@ import {
 
 const initialState: Web3State = {
   account: "",
-  chainId: 1,
+  chainId: 0,
   provider: null,
   waitingForApproval: false,
 }
@@ -49,11 +49,13 @@ const ethersSlice = createSlice({
     ),
   },
   extraReducers: {
-    [HYDRATE]: (state: any = {}, action: PayloadAction) => {
+    [HYDRATE]: (
+      state: any = {},
+      action: PayloadAction<{ web3: Web3State }>
+    ) => {
       if (action.type === HYDRATE) {
         return {
           ...state,
-          //@ts-ignore
           chainId: action.payload.web3.chainId,
         }
       }
