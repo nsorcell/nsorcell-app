@@ -1,7 +1,7 @@
 import "@nsorcell/protocol"
 import { REGISTRY } from "config/contract-addresses"
 
-export type ChainId = keyof typeof REGISTRY
+export type ChainId = keyof typeof REGISTRY | 0
 
 export enum LotteryEvents {
   DRAW = "Lottery6__Draw",
