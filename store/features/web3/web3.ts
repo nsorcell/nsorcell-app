@@ -1,9 +1,9 @@
-import { createReducer, createSlice } from "@reduxjs/toolkit"
+import { createReducer, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { HYDRATE } from "next-redux-wrapper"
 import { Web3State } from "types/store"
-import { initialChainId, initialProvider } from "utils/rpc"
 import {
-  addressesReceived,
   connect,
+  connectDefault,
   disconnect,
   switchChain,
   toggleWaitForApproval,
@@ -11,12 +11,9 @@ import {
 
 const initialState: Web3State = {
   account: "",
-  chainId: initialChainId(),
-  provider: initialProvider(),
+  chainId: 1,
+  provider: null,
   waitingForApproval: false,
-  addresses: {
-    lottery6: "",
-  },
 }
 
 const ethersSlice = createSlice({
@@ -25,6 +22,12 @@ const ethersSlice = createSlice({
   reducers: {
     connect: createReducer(initialState, (build) =>
       build.addCase(connect, (state, { payload }) => ({
+        ...state,
+        ...payload,
+      }))
+    ),
+    connectDefault: createReducer(initialState, (build) =>
+      build.addCase(connectDefault, (state, { payload }) => ({
         ...state,
         ...payload,
       }))
@@ -44,11 +47,19 @@ const ethersSlice = createSlice({
         state.provider = state.provider
       })
     ),
-    addressesReceived: createReducer(initialState, (build) =>
-      build.addCase(addressesReceived, (state, { payload }) => {
-        state.addresses = payload
-      })
-    ),
+  },
+  extraReducers: {
+    [HYDRATE]: (state: any = {}, action: PayloadAction) => {
+      if (action.type === HYDRATE) {
+        return {
+          ...state,
+          //@ts-ignore
+          chainId: action.payload.web3.chainId,
+        }
+      }
+
+      return state
+    },
   },
 })
 

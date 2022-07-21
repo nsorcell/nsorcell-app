@@ -8,11 +8,8 @@ export type History = Record<
 
 export interface Web3State {
   account: string
-  chainId: ChainId
-  provider: Web3Provider | JsonRpcProvider
-  addresses: {
-    lottery6: string
-  }
+  chainId: ChainId | 0
+  provider: Web3Provider | JsonRpcProvider | null
   waitingForApproval?: boolean
 }
 
@@ -26,4 +23,12 @@ export interface Lottery6State {
   numberOfDraws: number
   prizePool: string
   drawInterval: number
+}
+
+export type SupportedChainList = {
+  [keys in ChainId]?: string
+}
+
+export interface AddressState {
+  lottery6: SupportedChainList
 }
