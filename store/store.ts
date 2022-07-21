@@ -22,6 +22,7 @@ export const initStore = () => {
   const store = configureStore({
     middleware: [epicMiddleware],
     reducer,
+    devTools: process.env.NODE_ENV === "development",
   })
 
   epicMiddleware.run(rootEpic)
