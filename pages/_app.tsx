@@ -3,41 +3,31 @@ import { CacheProvider } from "@emotion/react"
 import Layout from "components/layout"
 import { appWithTranslation } from "next-i18next"
 import type { AppProps } from "next/app"
-import { Provider as Store } from "react-redux"
 import GlobalStyles from "styles/GlobalStyles"
 
 import Web3Provider from "components/provider"
 import { ToastContainer } from "react-toastify"
-import { store } from "store"
 import "styles/globals.css"
 
-import Boostrap from "components/boostrap"
+import Bootstrap from "components/bootstrap"
 import { ToastContainerSettings } from "config/toast-settings"
-import { FC, ReactNode } from "react"
+import { wrapper } from "store"
 
-const ActiveApp: FC<{ children: ReactNode }> = ({ children }) => {
-  return (
-    <>
-      <GlobalStyles />
-      <Boostrap />
-      <Layout>{children}</Layout>
-    </>
-  )
-}
-
-const App = ({ Component, pageProps }: AppProps) => {
-  return (
-    <CacheProvider value={cache}>
-      <Web3Provider>
-        <Store store={store}>
-          <ActiveApp>
+const App = wrapper.withRedux(
+  appWithTranslation(({ Component, pageProps }: AppProps) => {
+    return (
+      <CacheProvider value={cache}>
+        <Web3Provider>
+          <GlobalStyles />
+          <Bootstrap />
+          <Layout>
             <Component {...pageProps} />
-          </ActiveApp>
-        </Store>
-        <ToastContainer {...ToastContainerSettings} />
-      </Web3Provider>
-    </CacheProvider>
-  )
-}
+          </Layout>
+          <ToastContainer {...ToastContainerSettings} />
+        </Web3Provider>
+      </CacheProvider>
+    )
+  })
+)
 
-export default appWithTranslation(App)
+export default App

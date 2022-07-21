@@ -5,6 +5,12 @@ import { ChainId } from "types/web3"
 const CONNECT = "web3/connect"
 export const connect = createAction<Partial<Web3State>, typeof CONNECT>(CONNECT)
 
+const CONNECT_DEFAULT = "web3/connectDefault"
+export const connectDefault = createAction<
+  Partial<Web3State>,
+  typeof CONNECT_DEFAULT
+>(CONNECT_DEFAULT)
+
 const DISCONNECT = "web3/disconnect"
 export const disconnect = createAction<undefined, typeof DISCONNECT>(DISCONNECT)
 
@@ -25,30 +31,8 @@ export const switchChain = createAction<ChainId, typeof SWITCH_CHAIN>(
   SWITCH_CHAIN
 )
 
-export const ACTION_FAILED = "web3/actionFailed"
-export const actionFailed = createAction<
-  { reason: string },
-  typeof ACTION_FAILED
->(ACTION_FAILED)
-
 const TOGGLE_WAIT_FOR_TRANSACTION = "web3/toggleWaitForApproval"
 export const toggleWaitForApproval = createAction<
   undefined,
   typeof TOGGLE_WAIT_FOR_TRANSACTION
 >(TOGGLE_WAIT_FOR_TRANSACTION)
-
-const FETCH_ADDRESSES = "web3/fetchAddresses"
-export const fetchAddresses = createAction<undefined, typeof FETCH_ADDRESSES>(
-  FETCH_ADDRESSES
-)
-
-const ADDRESSES_RECEIVED = "web3/addressesReceived"
-export const addressesReceived = createAction<
-  Web3State["addresses"],
-  typeof ADDRESSES_RECEIVED
->(ADDRESSES_RECEIVED)
-
-const FETCH_FAILED = "web3/fetchFailed"
-export const fetchFailed = createAction<{ error: any }, typeof FETCH_FAILED>(
-  FETCH_FAILED
-)

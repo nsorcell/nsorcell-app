@@ -1,5 +1,8 @@
 import { MetaMaskInpageProvider } from "@metamask/providers"
+import { Registry__factory } from "@nsorcell/protocol"
+import { REGISTRY } from "config/contract-addresses"
 import { ethers } from "ethers"
+import { AddressState, SupportedChainList } from "types/store"
 import { ChainId } from "types/web3"
 import { RPC_URLS } from "./chains"
 // Local
@@ -26,15 +29,38 @@ export const injectedProvider = () => {
   }
 }
 
-export const initialChainId = () => {
-  const ip = injectedProvider()
-
-  // For now only rinkeby deployment, so set 4 as default to avoid ssr error
-  return ip ? (parseInt(ip?.chainId!, 16) as ChainId) : 4
+export const getDefaultProvider = (defaultChainId: ChainId) => {
+  return new ethers.providers.JsonRpcProvider(RPC_URLS[defaultChainId])
 }
 
-export const initialProvider = () => {
-  const chainId = initialChainId()
+export const getDefaultChain = (state: AddressState): ChainId => {
+  const [anyAddressState] = Object.values(state) as SupportedChainList[]
+  const [firstChain] = Object.keys(anyAddressState)
 
-  return new ethers.providers.JsonRpcProvider(RPC_URLS[chainId])
+  return parseInt(firstChain) as ChainId
+}
+
+export const getSupportedChains = async (): Promise<SupportedChainList> => {
+  return Object.fromEntries(
+    (
+      await Promise.all(
+        Object.entries(RPC_URLS).map(async ([chainIndex, rpc]) => {
+          const chainId = parseInt(chainIndex) as Exclude<ChainId, 0>
+          const provider = new ethers.providers.JsonRpcProvider(rpc)
+
+          try {
+            const registry = Registry__factory.connect(
+              REGISTRY[chainId],
+              provider
+            )
+
+            const address = await registry.getLottery6Address()
+            return [chainId, address]
+          } catch {
+            return []
+          }
+        })
+      )
+    ).filter((entry) => entry.length)
+  )
 }

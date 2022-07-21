@@ -3,17 +3,14 @@ import Lottery from "components/lottery"
 import type { NextPage } from "next"
 import { useTranslation } from "next-i18next"
 import Head from "next/head"
+import { wrapper } from "store"
+import { addressesReceived } from "store/features/address/actions"
+import { switchChain } from "store/features/web3/actions"
 import "twin.macro"
+import { AddressState } from "types/store"
+import { getDefaultChain, getSupportedChains } from "utils/rpc"
 
 import { getServerSideTranslations } from "utils/translations"
-
-export const getStaticProps = async ({ locale }: { locale: Locale }) => {
-  return {
-    props: {
-      ...(await getServerSideTranslations(locale)),
-    },
-  }
-}
 
 const Home: NextPage = () => {
   const { t } = useTranslation("common")
@@ -32,5 +29,23 @@ const Home: NextPage = () => {
     </>
   )
 }
+
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) =>
+    async ({ locale }) => {
+      const supportedChains = await getSupportedChains()
+      const addresses: AddressState = { lottery6: supportedChains }
+      const defaultChaiId = getDefaultChain(addresses)
+
+      store.dispatch(addressesReceived(addresses))
+      store.dispatch(switchChain(defaultChaiId))
+
+      return {
+        props: {
+          ...(await getServerSideTranslations(locale!)),
+        },
+      }
+    }
+)
 
 export default Home

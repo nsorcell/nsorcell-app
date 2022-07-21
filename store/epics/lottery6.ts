@@ -6,6 +6,7 @@ import { parseEther } from "ethers/lib/utils"
 import { combineEpics, Epic } from "redux-observable"
 import { catchError, filter, from, map, of, pipe, switchMap, tap } from "rxjs"
 import { State } from "store"
+import { fetchFailed } from "store/features/common/actions"
 import {
   enter,
   enterFailed,
@@ -13,7 +14,7 @@ import {
   fetchStats,
   fetchStatsReceived,
 } from "store/features/lottery6/actions"
-import { fetchFailed, toggleWaitForApproval } from "store/features/web3/actions"
+import { toggleWaitForApproval } from "store/features/web3/actions"
 import { globalT } from "utils/globalT"
 import { transformFetchStateResult } from "utils/store"
 
@@ -21,11 +22,11 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(fetchStats.match),
     switchMap(() => {
-      const { web3 } = state$.value
+      const { web3, address } = state$.value
 
       const lotteryContract = Lottery6__factory.connect(
-        web3.addresses.lottery6,
-        new providers.MulticallProvider(web3.provider)
+        address.lottery6[web3.chainId]!,
+        new providers.MulticallProvider(web3.provider!)
       )
 
       return from(
@@ -49,10 +50,10 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(enter.match),
     switchMap((action) => {
-      const { web3 } = state$.value
+      const { web3, address } = state$.value
 
       const lotteryContract = Lottery6__factory.connect(
-        web3.addresses.lottery6,
+        address.lottery6[web3.chainId]!,
         web3.provider!.getSigner()
       )
 
