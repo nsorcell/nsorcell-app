@@ -4,7 +4,7 @@ import { FC, useEffect } from "react"
 import { bootstrap } from "store/features/common/actions"
 import { listenToLotteryEvents } from "utils/listeners/events"
 import { listenToInPageProviderEvents } from "utils/listeners/inPageProvider"
-import { getDefaultChain, getDefaultProvider } from "utils/rpc"
+import { getDefaultChain } from "utils/rpc"
 
 const Bootstrap: FC = () => {
   const dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ const Bootstrap: FC = () => {
       const defaultChainId = getDefaultChain(address)
       const lotteryContract = Lottery6__factory.connect(
         address.lottery6[web3.chainId]! ?? address.lottery6[defaultChainId],
-        web3.provider ?? getDefaultProvider(defaultChainId)
+        web3.provider ?? web3.defaultProvider
       )
 
       const removeLotteryListeners = listenToLotteryEvents(

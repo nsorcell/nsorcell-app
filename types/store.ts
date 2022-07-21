@@ -8,8 +8,9 @@ export type History = Record<
 
 export interface Web3State {
   account: string
-  chainId: ChainId | 0
-  provider: Web3Provider | JsonRpcProvider | null
+  chainId: ChainId
+  provider: Web3Provider | null
+  defaultProvider: JsonRpcProvider | null
   waitingForApproval?: boolean
 }
 

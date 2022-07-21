@@ -21,7 +21,7 @@ const setDefaultDependencies: Epic<AnyAction, AnyAction, State> = (
 
       return connectDefault({
         chainId,
-        provider,
+        defaultProvider: provider,
       })
     })
   )

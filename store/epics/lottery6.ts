@@ -26,7 +26,7 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
 
       const lotteryContract = Lottery6__factory.connect(
         address.lottery6[web3.chainId]!,
-        new providers.MulticallProvider(web3.provider!)
+        new providers.MulticallProvider(web3.provider ?? web3.defaultProvider!)
       )
 
       return from(
@@ -37,7 +37,9 @@ const fetchStateEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
           lotteryContract.getDrawInterval(),
           lotteryContract.getNumberOfDraws(),
           lotteryContract.getLastDrawTimestamp(),
-          web3.provider!.getBalance(lotteryContract.address),
+          (web3.provider ?? web3.defaultProvider!).getBalance(
+            lotteryContract.address
+          ),
         ])
       ).pipe(
         map(pipe(transformFetchStateResult, fetchStatsReceived)),

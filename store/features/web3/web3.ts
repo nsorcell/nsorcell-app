@@ -13,6 +13,7 @@ const initialState: Web3State = {
   account: "",
   chainId: 0,
   provider: null,
+  defaultProvider: null,
   waitingForApproval: false,
 }
 
@@ -33,7 +34,11 @@ const ethersSlice = createSlice({
       }))
     ),
     disconnect: createReducer(initialState, (build) =>
-      build.addCase(disconnect, () => initialState)
+      build.addCase(disconnect, (state) => ({
+        ...state,
+        provider: null,
+        account: "",
+      }))
     ),
     toggleWaitForApproval: createReducer(initialState, (build) =>
       build.addCase(toggleWaitForApproval, (state) => ({
