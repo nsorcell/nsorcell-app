@@ -1,6 +1,6 @@
 import Loader, { Ellipsis } from "components/loader"
 import { GradientText, Text } from "components/typography"
-import formatDistance from "date-fns/formatDistance"
+import formatDistanceToNowStrict from "date-fns/formatDistanceToNowStrict"
 import { useAppSelector } from "hooks/store"
 import { TFunction, useTranslation } from "next-i18next"
 import { FC, ReactNode, useEffect, useMemo } from "react"
@@ -76,7 +76,7 @@ const DrawDisplay: FC = () => {
   }, [lastDraw, drawInterval])
 
   const drawIn = useMemo(
-    () => formatDistance(Date.now() + number * 1000, Date.now()),
+    () => formatDistanceToNowStrict(number * 1000),
     [number]
   )
 
