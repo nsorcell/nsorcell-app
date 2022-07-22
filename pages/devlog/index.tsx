@@ -5,7 +5,7 @@ import "twin.macro"
 
 import { getServerSideTranslations } from "utils/translations"
 
-export const getStaticProps = async ({ locale }: { locale: Locale }) => {
+export const getStaticProps = async ({ locale }: { locale: string }) => {
   return {
     props: {
       ...(await getServerSideTranslations(locale)),
