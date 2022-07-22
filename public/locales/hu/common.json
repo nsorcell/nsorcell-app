@@ -1,8 +1,8 @@
 {
-  "win": "",
-  "ether": "",
-  "title": "",
-  "about": "",
-  "devlog": "",
-  "results": ""
+  "win": "Win",
+  "ether": "Ether",
+  "title": "Nsorcell Blockchain Lottery",
+  "about": "About",
+  "devlog": "Devlog",
+  "results": "Results"
 }

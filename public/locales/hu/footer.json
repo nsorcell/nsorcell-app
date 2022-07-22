@@ -1,5 +1,17 @@
 {
-  "resources": { "resources": "", "next": "", "tailwind": "" },
-  "social": { "social": "", "github": "", "linkedin": "" },
-  "legal": { "legal": "", "privacy": "", "terms": "" }
+  "resources": {
+    "resources": "Resources",
+    "next": "Next",
+    "tailwind": "TailwindCSS"
+  },
+  "social": {
+    "social": "Social",
+    "github": "Github",
+    "linkedin": "LinkedIn"
+  },
+  "legal": {
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  }
 }

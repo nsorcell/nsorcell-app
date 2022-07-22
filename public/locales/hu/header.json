@@ -1,13 +1,18 @@
 {
   "connect": "Connect",
-  "menu": { "about": "", "devlog": "", "home": "", "results": "" },
-  "network": "",
+  "menu": {
+    "about": "About",
+    "devlog": "Devlog",
+    "home": "Home",
+    "results": "Results"
+  },
+  "network": "Network",
   "networks": {
-    "mainnet": "",
-    "rinkeby": "",
-    "matic": "",
-    "mumbai": "",
-    "local1": "",
-    "local2": ""
+    "mainnet": "Ethereum Mainnet",
+    "rinkeby": "Rinkeby Testnet",
+    "matic": "Polygon Mainnet",
+    "mumbai": "Mumbai Testnet",
+    "local1": "Local1 (1337)",
+    "local2": "Local2 (31337)"
   }
 }

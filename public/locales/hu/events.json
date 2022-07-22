@@ -1,8 +1,8 @@
 {
-  "youEntered": "",
-  "playerEntered": "",
-  "drawRequested": "",
-  "numbersDrawn": "",
-  "noWinners": "",
-  "winners": ""
+  "youEntered": "You have entered the lottery.",
+  "playerEntered": "The player {{player}} entered the lottery.",
+  "drawRequested": "Lottery draw is in progress.",
+  "numbersDrawn": "The winning numbers are the following: {{numbers}}",
+  "noWinners": "There are no winners in iteration {{iteration}}. The lottery is moving to STANDBY",
+  "winners": "The winners are {{winners}}. The lottery is distributing prizes, and moving to STANDBY"
 }
