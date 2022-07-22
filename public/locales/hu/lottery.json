@@ -1,4 +1,13 @@
 {
   "selectedNumbers": "Your currently selected numbers:",
-  "submitNumbers": "Submit your numbers"
+  "submitNumbers": "Submit your numbers",
+  "connectToPlay": "",
+  "letsWin": "",
+  "pickNumber": "",
+  "emptySlots": "",
+  "filledAll": "",
+  "select": "",
+  "selected": "",
+  "winning": "",
+  "numbers": ""
 }

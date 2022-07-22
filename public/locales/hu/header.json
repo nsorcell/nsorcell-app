@@ -1,3 +1,13 @@
 {
-  "connect": "Connect"
+  "connect": "Connect",
+  "menu": { "about": "", "devlog": "", "home": "", "results": "" },
+  "network": "",
+  "networks": {
+    "mainnet": "",
+    "rinkeby": "",
+    "matic": "",
+    "mumbai": "",
+    "local1": "",
+    "local2": ""
+  }
 }

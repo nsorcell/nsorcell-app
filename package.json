@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tkeys": "ts-node --esm utils/scripts/generateMissingTranslations"
   },
   "dependencies": {
     "@0xsequence/multicall": "^0.40.2",
