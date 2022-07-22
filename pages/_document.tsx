@@ -65,5 +65,7 @@ MyDocument.getInitialProps = async (ctx) => {
     </>
   )
 
+  console.log(initialProps)
+
   return initialProps
 }

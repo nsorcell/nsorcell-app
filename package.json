@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "tkeys": "ts-node --esm utils/scripts/generateMissingTranslations"
+    "lint": "next lint"
   },
   "dependencies": {
     "@0xsequence/multicall": "^0.40.2",
@@ -24,6 +23,7 @@
     "@web3-react/network": "8.0.26-beta.0",
     "@web3-react/types": "^8.0.19-beta.0",
     "@web3-react/walletconnect": "8.0.34-beta.0",
+    "date-fns": "^2.29.1",
     "ethers": "^5.6.9",
     "next": "^12.2.2",
     "next-i18next": "^11.0.0",
@@ -37,7 +37,8 @@
     "react-toastify": "^9.0.5",
     "redux-observable": "^2.0.0",
     "rxjs": "^7.5.6",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "usehooks-ts": "^2.6.0"
   },
   "devDependencies": {
     "@ethersproject/providers": "^5.6.8",

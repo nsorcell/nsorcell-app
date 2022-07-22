@@ -10,6 +10,7 @@ module.exports = {
         wiggle: "wiggle 1s ease-in-out infinite",
         circle: "circle .5s alternate-reverse infinite ease",
         shadow: "shadow .5s alternate infinite ease",
+        ellipsis: "ellipsis steps(4,end) 3000ms infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
@@ -27,6 +28,11 @@ module.exports = {
         "gradient-3": "#FF9CAE",
       },
       keyframes: {
+        ellipsis: {
+          to: {
+            width: "1.25em",
+          },
+        },
         wiggle: {
           "0%, 100%": { transform: "scale(1.05)" },
           "50%": { transform: "scale(1)" },
