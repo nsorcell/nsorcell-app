@@ -1,9 +1,17 @@
 import range from "ramda/src/range"
 import { globalT } from "utils/globalT"
-import { Domain } from "./types"
+import { Domain, LuckyNumbers } from "./types"
 
-export const getInitialDomain = (domainSize: number): Domain =>
-  Object.fromEntries(range(1, domainSize + 1).map((n) => [n, false]))
+export const getInitialDomain = (
+  domainSize: number,
+  playerNumbers?: LuckyNumbers
+): Domain =>
+  Object.fromEntries(
+    range(1, domainSize + 1).map((n) => [
+      n,
+      playerNumbers ? playerNumbers.includes(n) : false,
+    ])
+  )
 
 export const getSelected = (domain: Domain) =>
   Object.entries(domain)
@@ -13,8 +21,21 @@ export const getSelected = (domain: Domain) =>
 
 export const getSelectCount = (domain: Domain) => getSelected(domain).length
 
-export const getRemainingText = (domain: Domain, choices: number) => {
+export const getBottomText = (
+  domain: Domain,
+  choices: number,
+  isConnected: boolean,
+  inGame: boolean
+) => {
   const selectedCount = getSelectCount(domain)
+
+  if (!isConnected) {
+    return globalT("lottery:connectToPlay")
+  }
+
+  if (inGame) {
+    return globalT("lottery:alreadyInGame")
+  }
 
   if (selectedCount === 0) {
     return globalT("lottery:pickNumber", { numbers: choices })

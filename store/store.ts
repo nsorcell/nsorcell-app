@@ -4,6 +4,7 @@ import { createEpicMiddleware } from "redux-observable"
 
 import address from "./features/address"
 import lottery6 from "./features/lottery6"
+import player from "./features/player"
 import web3 from "./features/web3/web3"
 
 import rootEpic from "./epics"
@@ -11,6 +12,7 @@ import rootEpic from "./epics"
 const reducer = combineReducers({
   address: address.reducer,
   lottery: lottery6.reducer,
+  player: player.reducer,
   web3: web3.reducer,
 })
 

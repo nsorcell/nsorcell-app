@@ -1,4 +1,5 @@
 import type { JsonRpcProvider, Web3Provider } from "@ethersproject/providers"
+import { LuckyNumbers } from "components/lottery/types"
 import { ChainId } from "./web3"
 
 export type History = Record<
@@ -17,6 +18,7 @@ export interface Web3State {
 export type LotteryState = "STANDBY" | "OPEN" | "DRAWING" | "CALCULATING"
 
 export interface Lottery6State {
+  currentPlayerNumbers?: number[]
   players: string[]
   history: History
   state: LotteryState | "INITIAL"
@@ -24,6 +26,10 @@ export interface Lottery6State {
   numberOfDraws: number
   prizePool: string
   drawInterval: number
+}
+
+export interface PlayerState {
+  numbers?: LuckyNumbers
 }
 
 export type SupportedChainList = {

@@ -1,9 +1,10 @@
 import { GradientText, Text } from "components/typography"
 import { useAppSelector } from "hooks/store"
 import { useTranslation } from "next-i18next"
-import { FC, useCallback, useState } from "react"
+import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { useDispatch } from "react-redux"
 import { enter } from "store/features/lottery6/actions"
+import { fetchPlayerData } from "store/features/player/actions"
 import "twin.macro"
 import BottomActions from "./bottom-actions"
 import DomainLayout from "./domain-layout"
@@ -17,13 +18,16 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
 
   const dispatch = useDispatch()
 
-  const { waitingForApproval } = useAppSelector((state) => state.web3)
+  const { waitingForApproval, account } = useAppSelector((state) => state.web3)
+  const { numbers } = useAppSelector((state) => state.player)
+
+  const inGame = useMemo(() => !!numbers, [numbers])
 
   const [domain, updateDomain] = useState<Domain>(getInitialDomain(domainSize))
 
   const toggle = useCallback(
     (n: number) => () => {
-      if (!n || (getSelectCount(domain) === choices && !domain[n])) {
+      if (!n || (getSelectCount(domain) === choices && !domain[n]) || inGame) {
         return
       }
 
@@ -33,7 +37,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   )
 
   const submitNumbers = useCallback(() => {
-    if (getSelectCount(domain) < choices) {
+    if (getSelectCount(domain) < choices || inGame) {
       return
     }
 
@@ -42,11 +46,23 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
     dispatch(enter(luckyNumbers))
   }, [domain, choices])
 
+  useEffect(() => {
+    if (account) {
+      dispatch(fetchPlayerData())
+    }
+  }, [account])
+
+  useEffect(() => {
+    if (numbers) {
+      updateDomain(getInitialDomain(domainSize, numbers))
+    }
+  }, [numbers])
+
   return (
     <LotteryContainer>
       <Text variant="h5" tw="text-white mb-6">
-        {t("select")} {<GradientText>{t("winning")}</GradientText>}{" "}
-        {t("numbers")}
+        {inGame ? t("selected") : t("select")}{" "}
+        {<GradientText>{t("winning")}</GradientText>} {t("numbers")}
       </Text>
 
       <DomainLayout domain={domain} toggle={toggle} />
@@ -62,6 +78,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
           isLoading={!!waitingForApproval}
           domain={domain}
           choices={choices}
+          inGame={inGame}
           submit={submitNumbers}
         />
       </div>

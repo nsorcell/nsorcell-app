@@ -9,5 +9,6 @@
   "select": "Select your",
   "selected": "Selected",
   "winning": "winning",
-  "numbers": "numbers"
+  "numbers": "numbers",
+  "alreadyInGame": "You have already entered"
 }
