@@ -18,6 +18,7 @@ export interface Web3State {
 export type LotteryState = "STANDBY" | "OPEN" | "DRAWING" | "CALCULATING"
 
 export interface Lottery6State {
+  isLoaded: boolean
   currentPlayerNumbers?: number[]
   players: string[]
   history: History

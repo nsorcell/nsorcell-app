@@ -19,6 +19,9 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   const dispatch = useDispatch()
 
   const { waitingForApproval, account } = useAppSelector((state) => state.web3)
+  const { isLoaded: isLotteryStateLoaded } = useAppSelector(
+    (state) => state.lottery
+  )
   const { numbers } = useAppSelector((state) => state.player)
 
   const inGame = useMemo(() => !!numbers, [numbers])
@@ -75,7 +78,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
       <div tw="flex flex-col items-center">
         <SelectedNumbers domain={domain} choices={choices} toggle={toggle} />
         <BottomActions
-          isLoading={!!waitingForApproval}
+          isLoading={!!waitingForApproval || !isLotteryStateLoaded}
           domain={domain}
           choices={choices}
           inGame={inGame}

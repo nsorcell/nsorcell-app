@@ -42,6 +42,7 @@ export const transformFetchStateResult = ([
   const prizePool = resPrizePool.toString()
 
   return {
+    isLoaded: true,
     state: state_,
     players: resPlayers,
     history,

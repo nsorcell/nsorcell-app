@@ -25,12 +25,17 @@ export const getBottomText = (
   domain: Domain,
   choices: number,
   isConnected: boolean,
+  isLoading: boolean,
   inGame: boolean
 ) => {
   const selectedCount = getSelectCount(domain)
 
   if (!isConnected) {
     return globalT("lottery:connectToPlay")
+  }
+
+  if (isLoading) {
+    return globalT("lottery:loading")
   }
 
   if (inGame) {

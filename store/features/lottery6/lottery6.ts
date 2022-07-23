@@ -3,6 +3,7 @@ import { Lottery6State } from "types/store"
 import { fetchStatsReceived } from "./actions"
 
 const initialState: Lottery6State = {
+  isLoaded: false,
   players: [],
   history: [],
   state: "INITIAL",

@@ -10,5 +10,6 @@
   "selected": "Selected",
   "winning": "winning",
   "numbers": "numbers",
-  "alreadyInGame": "You have already entered"
+  "alreadyInGame": "You have already entered.",
+  "loading": "Lottery state is loading..."
 }

@@ -31,7 +31,7 @@ const BottomActions: FC<BottomActionsProps> = ({
     <BottomActionsContainer>
       <InstructionPill>
         <Text tw="text-dark-purple-500" variant="label">
-          {getBottomText(domain, choices, isConnected, inGame)}
+          {getBottomText(domain, choices, isConnected, isLoading, inGame)}
         </Text>
       </InstructionPill>
 
