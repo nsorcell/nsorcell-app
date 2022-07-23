@@ -31,25 +31,16 @@ const mapState: Record<
   ),
   STANDBY: (t) => (
     <Text variant="h5">
-      Waiting for players to{" "}
-      <GradientText>
-        enter
-        <Ellipsis />
-      </GradientText>
+      Waiting for players to <GradientText>enter...</GradientText>
     </Text>
   ),
   CALCULATING: () => (
     <Text variant="h5">
-      Figuring things out
+      Figuring things out...
       <Ellipsis />
     </Text>
   ),
-  DRAWING: () => (
-    <Text variant="h5">
-      Picking the winning numbers
-      <Ellipsis />
-    </Text>
-  ),
+  DRAWING: () => <Text variant="h5">Picking the winning numbers...</Text>,
   OPEN: (t, args) => (
     <Text variant="h5">
       Draw in: <GradientText>{args.drawIn}</GradientText>
@@ -81,14 +72,14 @@ const DrawDisplay: FC = () => {
   )
 
   return (
-    <Text variant="body1" tw=" text-gray-400 mt-6">
+    <Text variant="h5" tw="text-gray-400 mt-6 text-left">
       {t("lotteryState")}
-      <br />
+      <span className={colorMap[state]} tw="inline-flex mb-2">
+        {state}
+      </span>
       <div tw="flex items-center gap-1">
-        <Text variant="h5" className={colorMap[state]}>
-          {state}
-        </Text>
-        |{mapState[state](t, { drawIn })}
+        <span tw="hidden md:visible">|</span>
+        {mapState[state](t, { drawIn })}
       </div>
     </Text>
   )

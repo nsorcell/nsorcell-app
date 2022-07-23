@@ -13,7 +13,7 @@ const Heading: FC = () => {
 
   return (
     <HeadingContainer>
-      <Text variant="h1">
+      <Text variant="h1" tw="text-left">
         {t("win")}
         {
           <GradientText tw="animate-pulse">
