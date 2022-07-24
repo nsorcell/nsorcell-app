@@ -1,11 +1,11 @@
 import fs from "fs"
 import globby from "globby"
 
-import config from "../../next-i18next.config.js"
+import config from "next-i18next.config.js"
 
 const baseLocale = config.i18n.defaultLocale
 const targetLocales = config.i18n.locales.filter(
-  (locale) => locale !== baseLocale
+  (locale: string) => locale !== baseLocale
 )
 const localesPath = "public/locales"
 
@@ -53,7 +53,7 @@ const generateMissingTranslationKeysForFileAndLocale = async (
 const generateMissingTranslationKeys = async () => {
   ;(await globby(`${localesPath}/${baseLocale}/*.json`)).forEach((path) => {
     path = path.replace(`${localesPath}/${baseLocale}/`, "")
-    targetLocales.forEach((locale) => {
+    targetLocales.forEach((locale: string) => {
       generateMissingTranslationKeysForFileAndLocale(path, locale)
     })
   })
