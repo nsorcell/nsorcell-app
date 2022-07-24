@@ -5,4 +5,4 @@ export type LotteryProps = {
   choices: number
 }
 
-export type LuckyNumbers = [number, number, number, number, number, number]
+export type LuckyNumbers = number[]

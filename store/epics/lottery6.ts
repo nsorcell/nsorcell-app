@@ -60,7 +60,7 @@ const enterEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
       )
 
       return from(
-        lotteryContract.enter(action.payload, {
+        lotteryContract.enter(action.payload, false, {
           value: parseEther("0.1"),
         })
       ).pipe(

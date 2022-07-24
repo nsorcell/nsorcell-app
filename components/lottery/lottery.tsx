@@ -24,7 +24,7 @@ const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   )
   const { numbers } = useAppSelector((state) => state.player)
 
-  const inGame = useMemo(() => !!numbers, [numbers])
+  const inGame = useMemo(() => !!numbers?.length, [numbers])
 
   const [domain, updateDomain] = useState<Domain>(getInitialDomain(domainSize))
 

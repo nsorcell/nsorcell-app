@@ -26,7 +26,6 @@ const fetchPlayerDataEpic: Epic<AnyAction, AnyAction, State> = (
       )
 
       return from(lotteryContract.getPlayerNumbers(web3.account)).pipe(
-        filter((numbers) => numbers.every((n) => !n.isZero())),
         map((numbers) =>
           playerDataReceived({
             numbers: numbers.map((n) => n.toNumber()) as LuckyNumbers,
