@@ -54,6 +54,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 <img width="1792" alt="Screenshot 2022-07-25 at 12 22 49" src="https://user-images.githubusercontent.com/7677603/180755305-a4227590-a143-4077-bc6c-801c0d6907cb.png">
-![localhost_3000_(iPhone SE)](https://user-images.githubusercontent.com/7677603/180755326-6754c77a-7eb8-45b2-8d55-90d9595bd560.png)
 
+![localhost_3000_(iPhone SE)](https://user-images.githubusercontent.com/7677603/180755411-396fdb8d-82a6-4e8a-984a-0fe90e875ccf.png)
 
