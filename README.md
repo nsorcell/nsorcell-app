@@ -16,7 +16,7 @@ About the stack:
 - [Date-FNS](https://date-fns.org/)
 among others
 
-With all this, the performance, is still pretty good (~380kB first-load):
+#### With all this, the performance, is still pretty good (~380kB first-load):
 <img width="551" alt="Screenshot 2022-07-25 at 12 17 21" src="https://user-images.githubusercontent.com/7677603/180754393-2f40012b-bfc9-4db5-a98d-45f511c0b64b.png">
 
 
