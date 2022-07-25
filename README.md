@@ -1,8 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
+
+This is the frontend repository of a blockchain lottery. The documentation in progress, but here is a brief:
+
+About the stack:  
+- Typescript  
+- [Nextjs](https://nextjs.org/)
+- [TailwindCSS](https://tailwindcss.com/)  
+- [Styled Components](https://styled-components.com/)
+- [Emotion](https://emotion.sh)  
+- [Twin.Macro](https://github.com/ben-rogerson/twin.macro) (combining Styled Components with TailwindCSS)  
+- [NextI18Next](https://github.com/i18next/next-i18next) integrated (wrong translationkeys result in compilation errors)  
+- [Web3React](https://github.com/Uniswap/web3-react)  
+- [Ethers](https://docs.ethers.io/v5/)  
+- [Redux Toolkit](https://redux-toolkit.js.org/) + [Redux Observables](https://redux-observable.js.org/) (with hydration example)  
+- [Ramda](https://ramdajs.com/)
+among others
+
+## Problems - Solutions
+- Tailwind is awesome, but lot of noise -> Use styled components & twin.macro to separate presentational things.
+- Keep ABI's & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
+- Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic.
+- Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
 
 ## Getting Started
-
-First, run the development server:
 
 ```bash
 npm run dev
@@ -12,23 +32,4 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
