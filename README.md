@@ -26,6 +26,7 @@ Some of these problems and solutions are:
 - Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
 - Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel.
 - Fetching dependencies can be a long process -> fetch whatever is possible on the server-side, and hydrate Redux with it while rendering.
+- Contract addresses? -> Keeping a Registry which keeps track of all other contracts makes it possible, to not redeploy the frontend, when the contracts are released (and fetching every other contract address serverside makes it less demanding).
 
 ## Getting Started
 
