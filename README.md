@@ -1,6 +1,6 @@
 ## About
 
-This is the frontend repository of a blockchain lottery. The documentation in progress, but here is a brief:
+This is the frontend repository of a blockchain lottery. The documentation in progress [as well as the whole project], but here is a brief:
 
 About the stack:  
 - Typescript  
@@ -28,6 +28,11 @@ Some of these problems and solutions are:
 - Fetching dependencies can be a long process -> fetch whatever is possible on the server-side, and hydrate Redux with it while rendering.
 - Contract addresses? -> Keeping a Registry which keeps track of all other contracts makes it possible, to not redeploy the frontend, when the contracts are released (and fetching every other contract address serverside makes it less demanding).
 
+## Future plans
+- Create a proper results page showing the history, with previous numbers and winners
+- Create an About page, describing the rules
+- Create a Devlog page, explaining the technical choices
+- Add cypress for unit, and e2e testing
 ## Getting Started
 
 ### Note that whatever you do the `Rinkeby` network gets fetched right now, since the contracts are only deployed there. If you try to enter though, with your Provider network being something different, you will get an error.
