@@ -25,12 +25,12 @@ The events of the contracts are being listened on, you will get toasts about eve
 ## Problems - Solutions
 I have been working at Blockchain companies, for some time now, and I have tried to solve most problems I have encountered in this repository.
 Some of these problems and solutions are:
-- Tailwind is awesome, but lot of noise with the classes -> Use styled components & twin.macro to separate presentational things.
-- Keep ABI's on the frontend & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
-- Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic.
-- Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
-- Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel.
-- Fetching dependencies can be a long process -> fetch whatever is possible on the server-side, and hydrate Redux with it while rendering.
+- Tailwind is awesome, but lot of noise with the classes -> Use styled components & twin.macro to separate presentational things. [example](https://github.com/nsorcell/nsorcell-app/blob/main/components/lottery/lottery.styled.ts)
+- Keep ABI's on the frontend & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`). [example](https://github.com/nsorcell/nsorcell-app/blob/main/components/bootstrap/bootstrap.tsx)
+- Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic. [example](https://github.com/nsorcell/nsorcell-app/blob/main/store/epics/lottery6.ts)
+- Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors. [example](https://user-images.githubusercontent.com/7677603/180756512-b12d280c-2c35-4d14-a93e-969151c522b9.png)
+- Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel.[example](https://github.com/nsorcell/nsorcell-app/blob/main/store/epics/lottery6.ts)
+- Fetching dependencies can be a long process -> fetch whatever is possible on the server-side, and hydrate Redux with it while rendering.[example](https://github.com/nsorcell/nsorcell-app/blob/main/pages/index.tsx)
 - Contract addresses? -> Keeping a Registry which keeps track of all other contracts makes it possible, to not redeploy the frontend, when the contracts are released (and fetching every other contract address serverside makes it less demanding).
 
 ## Future plans
