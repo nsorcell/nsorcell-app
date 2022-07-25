@@ -19,8 +19,8 @@ among others
 ## Problems - Solutions
 I have been working at Blockchain companies, for some time now, and I have tried to solve most problems I have encountered in this repository.
 Some of these problems and solutions are:
-- Tailwind is awesome, but lot of noise -> Use styled components & twin.macro to separate presentational things.
-- Keep ABI's & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
+- Tailwind is awesome, but lot of noise with the classes -> Use styled components & twin.macro to separate presentational things.
+- Keep ABI's on the frontend & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
 - Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic.
 - Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
 
