@@ -12,10 +12,7 @@ import {
   winners,
 } from "store/features/events/actions"
 import { fetchStats } from "store/features/lottery6/actions"
-import {
-  fetchPlayerData,
-  playerDataReceived,
-} from "store/features/player/actions"
+import { fetchPlayerData } from "store/features/player/actions"
 import { globalT } from "utils/globalT"
 
 const playerEnteredEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
@@ -57,7 +54,7 @@ const noWinnersEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
         })
       )
     ),
-    mergeMap(() => from([fetchStats(), playerDataReceived({})]))
+    mergeMap(() => from([fetchStats(), fetchPlayerData()]))
   )
 
 const winnersEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
@@ -66,7 +63,7 @@ const winnersEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
     tap(({ payload }) =>
       notify(globalT("events:winners", { winners: payload }))
     ),
-    mergeMap(() => from([fetchStats(), playerDataReceived({})]))
+    mergeMap(() => from([fetchStats(), fetchPlayerData()]))
   )
 
 const events = combineEpics(
