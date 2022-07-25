@@ -32,6 +32,8 @@ Some of these problems and solutions are:
 
 ### Note that whatever you do the `Rinkeby` network gets fetched right now, since the contracts are only deployed there. If you try to enter though, with your Provider network being something different, you will get an error.
 
+#### The App is deployed [HERE](https://lottery.nsorcell.com)
+
 ```bash
 npm run dev
 # or
