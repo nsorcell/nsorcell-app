@@ -1,5 +1,4 @@
 ## About
-
 This is the frontend repository of a blockchain lottery. The documentation in progress [as well as the whole project], but here is a brief:
 
 About the stack:  
@@ -16,6 +15,8 @@ About the stack:
 - [Ramda](https://ramdajs.com/)
 - [Date-FNS](https://date-fns.org/)
 among others
+
+The events of the contracts are being listened on, you will get toasts about everything happening, and every data is live-updated.
 
 ## Problems - Solutions
 I have been working at Blockchain companies, for some time now, and I have tried to solve most problems I have encountered in this repository.
