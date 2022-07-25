@@ -46,7 +46,7 @@ const NetworkDropdown: FC = () => {
           type="button"
           aria-haspopup="true"
           aria-expanded="true"
-          aria-controls="headlessui-dropdown-button"
+          aria-controls="headlessui-dropdown-panel"
         >
           <span tw="mr-2">
             <FaNetworkWired size={20} tw="text-white" />
@@ -66,7 +66,6 @@ const NetworkDropdown: FC = () => {
       <DropdownContainer isOpen={isDropdownOpen}>
         <DropdownPanel
           tw="absolute right-0 w-56 mt-2 origin-top-right bg-panel divide-y divide-gray-800 rounded-md shadow-lg outline-none"
-          aria-labelledby="headlessui-dropdown-by"
           id="headlessui-dropdown-panel"
           role="menu"
         >
