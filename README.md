@@ -14,6 +14,7 @@ About the stack:
 - [Ethers](https://docs.ethers.io/v5/)  
 - [Redux Toolkit](https://redux-toolkit.js.org/) + [Redux Observables](https://redux-observable.js.org/) (with hydration example)  
 - [Ramda](https://ramdajs.com/)
+- [Date-FNS](https://date-fns.org/)
 among others
 
 ## Problems - Solutions
@@ -23,7 +24,8 @@ Some of these problems and solutions are:
 - Keep ABI's on the frontend & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
 - Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic.
 - Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
-- Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel
+- Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel.
+- Fetching dependencies can be a long process -> fetch whatever is possible on the server-side, and hydrate Redux with it while rendering.
 
 ## Getting Started
 
