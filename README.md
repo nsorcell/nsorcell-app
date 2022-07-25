@@ -23,6 +23,7 @@ Some of these problems and solutions are:
 - Keep ABI's on the frontend & keep them up to date :( -> Create an installable npm package from the hardhat typechain output (`@nsorcell/protocol`).
 - Async logic is also very noisy in useEffects -> Use redux observables, to decouple asynchronous logic.
 - Translation keys are arbitrary, easy typos -> Leverage typescript, so wrong translation keys are compilation errors.
+- Blockchain fetching performance is hairy -> use a MulticallProvider when fetching data, so all requests are in parallel
 
 ## Getting Started
 
