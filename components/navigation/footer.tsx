@@ -16,8 +16,8 @@ const FooterList: FC<{ heading: string; items: (string | ReactNode)[] }> = ({
       </Text>
     </li>
     <>
-      {items.map((item) => (
-        <li key={item} tw="mb-5">
+      {items.map((item, i) => (
+        <li key={`footer-item-${i}`} tw="mb-5">
           <Text variant="subtitle2" tw="text-gray-400">
             {item}
           </Text>
