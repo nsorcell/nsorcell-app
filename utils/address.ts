@@ -1,3 +1,5 @@
+import { History } from "types/store"
+
 export const shortenAddress = (address: string): string => {
   if (!address) return ""
   return (
@@ -9,3 +11,13 @@ export const shortenAddress = (address: string): string => {
 
 export const blockScan = (address: string) =>
   `https://blockscan.com/address/${address}`
+
+export const getPlayerHits = (
+  account: string,
+  history: History,
+  iteration: number
+) => {
+  const { results } = history[iteration]
+
+  return results.indexOf(results.find((n) => n.includes(account)) ?? [])
+}

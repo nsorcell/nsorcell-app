@@ -18,7 +18,9 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
 const Home: NextPage = () => {
   const { t } = useTranslation("common")
 
-  const { history } = useAppSelector((state) => state.lottery)
+  const { account } = useAppSelector((state) => state.web3)
+  const { history, numberOfDraws } = useAppSelector((state) => state.lottery)
+
   return (
     <>
       <Head>
@@ -34,7 +36,7 @@ const Home: NextPage = () => {
           {Object.entries(history)
             .reverse()
             .map(([iteration, { winningNumbers, results }]) => (
-              <div tw="mb-4">
+              <div tw="mb-4" key={`results-${iteration}`}>
                 <div tw="mb-2">
                   <Text variant="h5" tw="text-white">
                     Round: {iteration}
@@ -46,7 +48,11 @@ const Home: NextPage = () => {
                     Winning Numbers: {winningNumbers.join(", ")}
                   </Text>
                 </div>
-                {JSON.stringify(results)}
+                {results.map((hits, i) => (
+                  <Text key={`hits-${i}`} variant="subtitle1" tw="text-white">
+                    {`${i} hits: ${hits.join("\n")}`}
+                  </Text>
+                ))}
               </div>
             ))}
         </div>
