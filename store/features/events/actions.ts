@@ -1,6 +1,5 @@
 import { createAction } from "@reduxjs/toolkit"
 import { LuckyNumbers } from "components/lottery/types"
-import { Lottery6State } from "types/store"
 
 const REQUESTED_DRAW = "events/requestedDraw"
 export const requestedDraw = createAction<undefined, typeof REQUESTED_DRAW>(
@@ -20,9 +19,7 @@ export const playerEntered = createAction<
 >(PLAYER_ENTERED)
 
 const RESULTS = "events/results"
-export const results = createAction<Lottery6State["history"], typeof RESULTS>(
-  RESULTS
-)
+export const results = createAction<string[][], typeof RESULTS>(RESULTS)
 
 const EVENT_TRIGGERED = "events/eventTriggered"
 export const eventTriggered = createAction<any, typeof EVENT_TRIGGERED>(
