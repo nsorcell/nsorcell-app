@@ -46,17 +46,19 @@ const numbersDrawnEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
 const resultsEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
     filter(results.match),
-    tap(({ payload }) =>
-      notify(
-        globalT("events:results", {
-          hits: payload.indexOf(
-            payload.find((hitMap) =>
-              hitMap.includes(state$.value.web3.account)
-            )!
-          ),
-          iteration: state$.value.lottery.numberOfDraws - 1,
-        })
-      )
+    tap(
+      ({ payload }) =>
+        payload &&
+        notify(
+          globalT("events:results", {
+            hits: payload.indexOf(
+              payload.find((hitMap) =>
+                hitMap.includes(state$.value.web3.account)
+              )!
+            ),
+            iteration: state$.value.lottery.numberOfDraws - 1,
+          })
+        )
     ),
     mergeMap(() => from([fetchStats(), fetchPlayerData()]))
   )
