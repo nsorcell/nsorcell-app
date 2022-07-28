@@ -2,11 +2,10 @@ import { Lottery6 } from "@nsorcell/protocol"
 import { BigNumber } from "ethers"
 import { AppDispatch } from "store"
 import {
-  noWinners,
   numbersDrawn,
   playerEntered,
   requestedDraw,
-  winners,
+  results,
 } from "store/features/events/actions"
 import { LotteryEvents } from "types/web3"
 
@@ -26,16 +25,12 @@ export const listenToLotteryEvents = (
         })
       )
     })
-    .on(LotteryEvents.NO_WINNERS, () => dispatch(noWinners()))
-    .on(LotteryEvents.WINNERS, () => {
-      dispatch(winners({ winners: [] }))
-    })
+    .on(LotteryEvents.RESULTS, (event: string[][]) => dispatch(results(event)))
 
   return () => {
     contract.removeAllListeners(LotteryEvents.ENTER)
     contract.removeAllListeners(LotteryEvents.REQUESTED_DRAW)
     contract.removeAllListeners(LotteryEvents.DRAW)
-    contract.removeAllListeners(LotteryEvents.NO_WINNERS)
-    contract.removeAllListeners(LotteryEvents.WINNERS)
+    contract.removeAllListeners(LotteryEvents.RESULTS)
   }
 }

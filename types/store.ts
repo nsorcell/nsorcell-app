@@ -4,7 +4,7 @@ import { ChainId } from "./web3"
 
 export type History = Record<
   number,
-  { winningNumbers: number[]; winners: string[] }
+  { winningNumbers: number[]; results: string[][] }
 >
 
 export interface Web3State {

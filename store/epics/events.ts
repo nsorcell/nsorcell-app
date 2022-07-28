@@ -5,11 +5,10 @@ import { combineEpics, Epic } from "redux-observable"
 import { filter, from, map, mergeMap, tap } from "rxjs"
 import { State } from "store"
 import {
-  noWinners,
   numbersDrawn,
   playerEntered,
   requestedDraw,
-  winners,
+  results,
 } from "store/features/events/actions"
 import { fetchStats } from "store/features/lottery6/actions"
 import { fetchPlayerData } from "store/features/player/actions"
@@ -44,24 +43,20 @@ const numbersDrawnEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
     map(() => fetchStats())
   )
 
-const noWinnersEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
+const resultsEpic: Epic<AnyAction, AnyAction, State> = (action$, state$) =>
   action$.pipe(
-    filter(noWinners.match),
-    tap(() =>
+    filter(results.match),
+    tap(({ payload }) =>
       notify(
-        globalT("events:noWinners", {
+        globalT("events:results", {
+          hits: payload.indexOf(
+            payload.find((hitMap) =>
+              hitMap.includes(state$.value.web3.account)
+            )!
+          ),
           iteration: state$.value.lottery.numberOfDraws - 1,
         })
       )
-    ),
-    mergeMap(() => from([fetchStats(), fetchPlayerData()]))
-  )
-
-const winnersEpic: Epic<AnyAction, AnyAction, State> = (action$) =>
-  action$.pipe(
-    filter(winners.match),
-    tap(({ payload }) =>
-      notify(globalT("events:winners", { winners: payload }))
     ),
     mergeMap(() => from([fetchStats(), fetchPlayerData()]))
   )
@@ -70,8 +65,7 @@ const events = combineEpics(
   playerEnteredEpic,
   drawRequestedEpic,
   numbersDrawnEpic,
-  noWinnersEpic,
-  winnersEpic
+  resultsEpic
 )
 
 export default events

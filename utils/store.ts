@@ -22,12 +22,12 @@ export const transformFetchStateResult = ([
   resPrizePool,
 ]: FetchStateResponse) => {
   const history = resHistory.reduce<History>(
-    (acc, [winningNumbers, winners], i) => {
+    (acc, [winningNumbers, results], i) => {
       return {
         ...acc,
         [i]: {
           winningNumbers: winningNumbers.map((n) => n.toNumber()),
-          winners,
+          results,
         },
       }
     },
