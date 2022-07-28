@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         <div>
           {Object.entries(history)
             .reverse()
-            .map(([iteration, { winningNumbers, winners }]) => (
+            .map(([iteration, { winningNumbers, results }]) => (
               <div tw="mb-4">
                 <div tw="mb-2">
                   <Text variant="h5" tw="text-white">
@@ -46,17 +46,7 @@ const Home: NextPage = () => {
                     Winning Numbers: {winningNumbers.join(", ")}
                   </Text>
                 </div>
-                {winners.length ? (
-                  <Text variant="body2" tw="text-white">
-                    Winner(s): {winners.join("\n")}
-                  </Text>
-                ) : (
-                  <div>
-                    <Text variant="body2" tw="text-white">
-                      No Winners
-                    </Text>
-                  </div>
-                )}
+                {JSON.stringify(results)}
               </div>
             ))}
         </div>
