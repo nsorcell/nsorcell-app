@@ -66,7 +66,7 @@ const Home: NextPage = () => {
             </Text>
           )}
           <div tw="w-full h-[0.5px] bg-gray-700 my-4" />
-          {hits ? (
+          {hits !== null ? (
             <Text variant="h5" tw="text-white mt-4">
               You had
               <GradientText tw="font-bold text-4xl px-2">{hits}</GradientText>
