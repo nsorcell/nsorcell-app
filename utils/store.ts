@@ -12,7 +12,7 @@ type FetchStateResponse = [
   BigNumber
 ]
 
-export const transformFetchStateResult = ([
+export const transformFetchStatsResult = ([
   resState,
   resPlayers,
   resHistory,
