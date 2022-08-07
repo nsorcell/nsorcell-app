@@ -20,7 +20,7 @@ export const getStaticProps = async ({ locale }: { locale: string }) => {
 
 const Home: NextPage = () => {
   const { t } = useTranslation("common")
-  const [hits, setHits] = useState<number | null>(null)
+  const [hits, setHits] = useState<number | null>()
   const [winningNums, setWinningNums] = useState<number[]>()
 
   const { account } = useAppSelector((state) => state.web3)
@@ -30,14 +30,15 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (history && account) {
-      const { winningNumbers, results } = history[numberOfDraws - 1]
+      const { winningNumbers, results } = history[numberOfDraws - 1] ?? {}
 
       setWinningNums(winningNumbers)
 
-      const hits = results.indexOf(
+      const hits = results?.indexOf(
         results.find((r) => r.includes(account)) ?? []
       )
 
+      console.log(hits)
       setHits(hits)
     }
   }, [history, account])
@@ -59,14 +60,14 @@ const Home: NextPage = () => {
               <GradientText>{winningNums.join(", ")}</GradientText>
             </Text>
           )}
-          {numbers && (
+          {Boolean(numbers?.length) && (
             <Text variant="h5" tw="flex justify-between text-white pr-80">
               Your numbers are:{" "}
               <GradientText>{numbers?.join(", ")}</GradientText>
             </Text>
           )}
           <div tw="w-full h-[0.5px] bg-gray-700 my-4" />
-          {hits !== null ? (
+          {hits !== undefined ? (
             <Text variant="h5" tw="text-white mt-4">
               You had
               <GradientText tw="font-bold text-4xl px-2">{hits}</GradientText>
