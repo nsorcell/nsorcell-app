@@ -1,6 +1,5 @@
 import { GradientText, Text } from "components/typography"
 import { useAppSelector } from "hooks/store"
-import { trpc } from "hooks/trpc"
 import { useTranslation } from "next-i18next"
 import { FC, useCallback, useEffect, useMemo, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -16,8 +15,6 @@ import { getInitialDomain, getSelectCount, getSelected } from "./utils"
 
 const Lottery: FC<LotteryProps> = ({ choices, domainSize }) => {
   const { t } = useTranslation("lottery")
-
-  const x = trpc.useQuery(["healthz"])
 
   const dispatch = useDispatch()
 
